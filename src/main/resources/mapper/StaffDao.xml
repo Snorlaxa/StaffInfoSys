@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="snorlaxa.com.infosys.personnel.system.dao.StaffDao">
+
+    <resultMap id="BaseResultMap" type="snorlaxa.com.infosys.personnel.system.po.StaffPo">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="gender" property="gender" />
+        <result column="age" property="age"/>
+        <result column="degree" property="degree" />
+        <result column="title" property="title" />
+        <result column="school" property="school" />
+        <result column="working_years" property="workingYears"/>
+        <result column="edu_exp" property="eduExp" />
+        <result column="job_exp" property="jobExp" />
+        <result column="project_exp" property="projectExp" />
+        <result column="job_id" property="jobId"/>
+        <result column="employ_status" property="employStatus" />
+        <result column="interview_comments" property="interviewComments" />
+        <result column="interview_score" property="interviewScore" />
+        <result column="probation_score" property="probationScore"/>
+        <result column="interviewers" property="interviewers" />
+        <result column="resume_path" property="resumePath" />
+        <result column="speciality" property="speciality" />
+        <result column="interview_times" property="interviewTimes"/>
+        <result column="email" property="email" />
+        <result column="phone" property="phone" />
+        <result column="address" property="address" />
+        <result column="city" property="city"/>
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="AttributesList">
+        id, name, gender,age,degree, school, working_years,edu_exp,job_exp, project_exp,
+        job_id,employ_status,interview_comments, interview_score,
+        probation_score,interviewers,resume_path, speciality, interview_times,email,phone,address,city,create_time,update_time
+    </sql>
+
+    <select id="selectStaffs" resultMap="BaseResultMap" parameterType="snorlaxa.com.infosys.personnel.system.dto.StaffSelectDto">
+        SELECT
+            <include refid="AttributesList"/>
+        FROM staff
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+            <if test="jobId != null and jobId != ''">
+                and job_id = #{jobId}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="degree != null">
+                and degree >= #{degree}
+            </if>
+            <if test="city != null and city != ''">
+                and city = #{city}
+            </if>
+            <if test="workingYears != null">
+                and working_years >= #{workingYears}
+            </if>
+            <if test="employStatus != null">
+                and employStatus = #{employStatus}
+            </if>
+            <if test="interviewTimes != null">
+                and interview_times = #{interviewTimes}
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+        </where>
+        ORDER BY update_time
+    </select>
+
+    <insert id="upsertStaff" parameterType="snorlaxa.com.infosys.personnel.system.po.StaffPo">
+        INSERT INTO staff(id,name, gender, age,
+                          degree, school, working_years,
+                          edu_exp, job_exp, project_exp,
+                          job_id, employ_status,
+                          interview_comments, interview_score,
+                          probation_score, interviewers, resume_path,
+                          speciality, interview_times, email, phone,
+                          address, city)
+        VALUES (#{id},#{name}, #{gender}, #{age},#{degree},#{school},#{workingYears},
+                   #{eduExp},#{jobExp}, #{projectExp}, #{jobId}, #{employStatus}, #{interviewComments},#{interviewScore},
+                #{probationScore}, #{interviewers},#{resumePath},#{speciality},#{interviewTimes},
+                #{email}, #{phone}, #{address}, #{city})
+        on duplicate key update name=#{name}, gender = #{gender}, age = #{age}, degree = #{degree},
+                                school = #{school},working_years = #{workingYears},edu_exp=#{eduExp},
+                                job_exp = #{jobExp}, project_exp = #{projectExp}, job_id = #{jobId},
+                                employ_status = #{employStatus},interview_comments = #{interviewComments},interview_score = #{interviewScore},
+                                probation_score = #{probationScore}, interviewers = #{interviewers},
+                                resume_path = #{resumePath},speciality = #{speciality},interview_times=#{interviewTimes},
+                                email = #{email}, phone = #{phone}, address = #{address}, city = #{city}
+    </insert>
+
+    <delete id="deleteStaff">
+        DELETE FROM staff where id =#{id}
+    </delete>
+</mapper>

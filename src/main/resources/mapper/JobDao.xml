@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="snorlaxa.com.infosys.personnel.system.dao.JobDao">
+
+    <resultMap id="BaseResultMap" type="snorlaxa.com.infosys.personnel.system.po.JobPo">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="requirement" property="requirement" />
+        <result column="number" property="number"/>
+        <result column="current_number" property="currentNumber" />
+        <result column="salary" property="salary" />
+        <result column="department_id" property="departmentId" />
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <sql id="AttributesList">
+        id, name, requirement,number,current_number, salary, department_id,create_time,update_time
+    </sql>
+
+    <select id="selectJobs" resultMap="BaseResultMap" parameterType="snorlaxa.com.infosys.personnel.system.dto.JobSelectDto">
+        SELECT
+            <include refid="AttributesList"/>
+        FROM job
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="departmentId != null and departmentId  != ''">
+                and department_id = #{departmentId}
+            </if>
+        </where>
+        ORDER BY update_time
+    </select>
+
+    <insert id="upsertJob" parameterType="snorlaxa.com.infosys.personnel.system.po.JobPo">
+        INSERT INTO job(id,name, requirement, number,
+                        current_number, salary, department_id)
+        VALUES (#{id},#{name}, #{requirement}, #{number},#{currentNumber},#{salary},#{departmentId})
+        on duplicate key update name=#{name}, requirement = #{requirement}, number = #{number}, current_number = #{currentNumber},
+                                salary = #{salary},department_id = #{departmentId}
+    </insert>
+
+    <delete id="deleteJob">
+        DELETE FROM job where id =#{id}
+    </delete>
+</mapper>

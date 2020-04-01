@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="snorlaxa.com.infosys.personnel.system.dao.AbilityDao">
+
+    <select id="selectAbilitys" resultType="snorlaxa.com.infosys.personnel.system.po.AbilityPo" parameterType="snorlaxa.com.infosys.personnel.system.po.AbilityPo">
+        SELECT id, name, classify
+        FROM ability
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="classify != null and classify != ''">
+                and classify = #{classify}
+            </if>
+        </where>
+    </select>
+
+    <insert id="upsertAbility" parameterType="snorlaxa.com.infosys.personnel.system.po.AbilityPo">
+        INSERT INTO ability(id,name, classify)
+        VALUES (#{id},#{name}, #{classify})
+        on duplicate key update name=#{name}, classify = #{classify}
+    </insert>
+
+    <delete id="deleteAbility">
+        DELETE FROM ability
+        <where>
+            <if test="id!=null and id != ''">
+                id =#{id}
+            </if>
+            <if test="classify !=null and classify != ''">
+                and classify =#{classify}
+            </if>
+        </where>
+
+    </delete>
+</mapper>

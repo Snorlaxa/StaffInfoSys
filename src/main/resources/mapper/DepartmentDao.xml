@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="snorlaxa.com.infosys.personnel.system.dao.DepartmentDao">
+
+    <resultMap id="BaseResultMap" type="snorlaxa.com.infosys.personnel.system.po.DepartmentPo">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="staff_num" property="staffNum" />
+    </resultMap>
+
+    <select id="selectDepartments" resultMap="BaseResultMap">
+        SELECT id, name, staff_num
+        FROM department
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+        </where>
+    </select>
+
+    <insert id="upsertDepartment" parameterType="snorlaxa.com.infosys.personnel.system.po.DepartmentPo">
+        INSERT INTO department(id,name, staff_num)
+        VALUES (#{id},#{name}, #{staffNum})
+        on duplicate key update name=#{name}, staff_num = #{staffNum}
+    </insert>
+
+    <delete id="deleteDepartment">
+        DELETE FROM department where id =#{id}
+    </delete>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="snorlaxa.com.infosys.personnel.system.dao.ScoreDao">
+
+    <select id="selectJobScore" resultType="snorlaxa.com.infosys.personnel.system.dto.ScoreDto">
+        SELECT ab.name, jra.score,ab.classify
+        FROM job_required_ability as jra
+            left join job
+                on jra.job_id=job.id
+            left join ability as ab
+                on jra.ability_id=ab.id
+        <where>
+            <if test="jobId != null and jobId != ''">
+                job.id = #{jobId}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectStaffScore" resultType="snorlaxa.com.infosys.personnel.system.dto.ScoreDto">
+        SELECT ab.name, sa.score,ab.classify
+        FROM staff_ability as sa
+            left join staff
+                on sa.staff_id=staff.id
+            left join ability as ab
+                on sa.ability_id=ab.id
+        <where>
+            <if test="staffId != null and staffId != ''">
+                sa.staff_id = #{staffId}
+            </if>
+        </where>
+    </select>
+
+    <insert id="upsertJobScore">
+        INSERT INTO job_required_ability(job_id,ability_id, score)
+        VALUES (#{jobId},#{abilityId}, #{score})
+        on duplicate key update score = #{score}
+    </insert>
+
+    <insert id="upsertStaffScore">
+        INSERT INTO staff_ability(staff_id,ability_id, score)
+        VALUES (#{staffId},#{abilityId}, #{score})
+        on duplicate key update score = #{score}
+    </insert>
+
+    <delete id="deleteJobScore">
+        DELETE FROM job_required_ability
+        <where>
+            <if test="jobId != null and jobId != ''">
+                job_id = #{jobId}
+            </if>
+            <if test="abilityId != null and abilityId != ''">
+                and ability_id = #{abilityId}
+            </if>
+        </where>
+    </delete>
+
+    <delete id="deleteStaffScore">
+        DELETE FROM staff_ability
+        <where>
+            <if test="staffId != null and  staffId != ''">
+                staff_id = #{staffId}
+            </if>
+            <if test="abilityId != null and abilityId != ''">
+                and ability_id = #{abilityId}
+            </if>
+        </where>
+    </delete>
+</mapper>
