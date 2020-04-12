@@ -14,6 +14,18 @@
         <result column="update_time" property="updateTime" />
     </resultMap>
 
+    <resultMap id="BaseJobVo" type="snorlaxa.com.infosys.personnel.system.view.vo.JobVo">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="requirement" property="requirement" />
+        <result column="number" property="number"/>
+        <result column="current_number" property="currentNumber" />
+        <result column="salary" property="salary" />
+        <result column="department_name" property="department" />
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
     <sql id="AttributesList">
         id, name, requirement,number,current_number, salary, department_id,create_time,update_time
     </sql>
@@ -34,6 +46,13 @@
             </if>
         </where>
         ORDER BY update_time
+    </select>
+
+    <select id="selectJobVoById" resultMap="BaseJobVo">
+        SELECT job.id, job.name, requirement,number,current_number, salary, department.name as department_name,create_time,update_time
+        FROM job LEFT JOIN department
+        ON job.department_id = department.id
+        where  job.id = #{id}
     </select>
 
     <insert id="upsertJob" parameterType="snorlaxa.com.infosys.personnel.system.po.JobPo">

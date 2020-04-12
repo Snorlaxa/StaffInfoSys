@@ -18,4 +18,7 @@ public class StaffSelectDto {
     private Integer workingYears;
     private Integer employStatus;
     private Integer interviewTimes;
+    private Integer limit;
+    private String jobName;
+    private String department;
 }

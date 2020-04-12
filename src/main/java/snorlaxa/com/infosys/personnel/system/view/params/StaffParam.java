@@ -6,6 +6,7 @@ import snorlaxa.com.infosys.personnel.system.po.StaffPo;
 import snorlaxa.com.infosys.personnel.utils.UUIDUtil;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * @Author: snorlaxa
@@ -16,29 +17,29 @@ public class StaffParam {
     private String id;
     @NotEmpty(message = "姓名不能为空！")
     private String name;
-    @NotEmpty(message = "性别不能为空！")
-    private int gender;
-    @NotEmpty(message = "年龄不能为空！")
-    private int age;
-    @NotEmpty(message = "学历不能为空！")
-    private int degree;
+    @NotNull(message = "性别不能为空！")
+    private Integer gender;
+    @NotNull(message = "年龄不能为空！")
+    private Integer age;
+    @NotNull(message = "学历不能为空！")
+    private Integer degree;
     private String school;
-    @NotEmpty(message = "工作年限不能为空！")
-    private int workingYears;
+    @NotNull(message = "工作年限不能为空！")
+    private Integer workingYears;
     private String eduExp;
     private String jobExp;
     private String projectExp;
     @NotEmpty(message = "岗位id不能为空！")
     private String jobId;
-    private int employStatus;
+    private Integer employStatus=-1;
     private String interviewComments;
-    private int interviewScore;
-    private int probationScore;
+    private Integer interviewScore=0;
+    private Integer probationScore=0;
     private String interviewers;
     @NotEmpty(message = "未上传简历！")
     private String resumePath;
     private String speciality;
-    private int interviewTimes;
+    private Integer interviewTimes=0;
     @NotEmpty(message = "email不能为空！")
     private String email;
     @NotEmpty(message = "电话不能为空！")

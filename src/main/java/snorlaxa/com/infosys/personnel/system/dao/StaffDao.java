@@ -2,6 +2,7 @@ package snorlaxa.com.infosys.personnel.system.dao;
 
 import snorlaxa.com.infosys.personnel.system.dto.StaffSelectDto;
 import snorlaxa.com.infosys.personnel.system.po.StaffPo;
+import snorlaxa.com.infosys.personnel.system.view.vo.StaffVo;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ import java.util.List;
  */
 public interface StaffDao {
     List<StaffPo> selectStaffs(StaffSelectDto selectDto);
+    StaffPo selectStaffById(String id);
     void upsertStaff(StaffPo staffPo);
     void deleteStaff(String id);
+    List<StaffVo> selectStaffVos(StaffSelectDto selectDto);
 }

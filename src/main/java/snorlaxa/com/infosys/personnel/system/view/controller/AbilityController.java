@@ -24,7 +24,6 @@ import javax.validation.Valid;
 public class AbilityController {
     @Autowired
     AbilityService abilityService;
-
     @GetMapping("/")
     @ApiOperation(value = "获取技能信息")
     public Result getAbilitys(AbilityPo abilityPo){
@@ -51,4 +50,6 @@ public class AbilityController {
         abilityService.deleteAbility(id,classify);
         return Results.success(BaseEnums.OPERATION_SUCCESS.desc(),BaseEnums.OPERATION_SUCCESS.code());
     }
+
+
 }

@@ -11,6 +11,7 @@ import snorlaxa.com.infosys.personnel.system.dto.JobSelectDto;
 import snorlaxa.com.infosys.personnel.system.po.JobPo;
 import snorlaxa.com.infosys.personnel.system.service.JobService;
 import snorlaxa.com.infosys.personnel.system.view.params.JobParam;
+import snorlaxa.com.infosys.personnel.system.view.vo.JobVo;
 import snorlaxa.com.infosys.personnel.utils.Results;
 
 import javax.validation.Valid;
@@ -37,6 +38,13 @@ public class JobController {
         return Results.successWithData(result, BaseEnums.SUCCESS.desc(),BaseEnums.SUCCESS.code());
     }
 
+    @GetMapping("/getById")
+    @ApiOperation(value = "获取岗位信息")
+    public Result getJobVoById(String id){
+        JobVo jobVo = jobService.getJobVoById(id);
+        return Results.successWithData(jobVo, BaseEnums.SUCCESS.desc(),BaseEnums.SUCCESS.code());
+    }
+
     @PutMapping("/")
     @ApiOperation(value = "新增或更新岗位")
     public Result upsertJob(@RequestBody @Valid JobParam jobParam){
@@ -52,6 +60,16 @@ public class JobController {
         }
         jobService.delJob(id);
         return Results.success();
+    }
+
+    @RequestMapping(value = "/queryJobsByDepartment",method = RequestMethod.GET)
+    public Result queryJobsByDepartment(String department){
+        JobSelectDto jobSelectDto = new JobSelectDto();
+        if(!StringUtils.isEmpty(department)){
+            jobSelectDto.setDepartmentId(department);
+        }
+        List<JobPo> res = jobService.getJobs(jobSelectDto);
+        return Results.successWithData(res,BaseEnums.SUCCESS.desc(),BaseEnums.SUCCESS.code());
     }
 
 }

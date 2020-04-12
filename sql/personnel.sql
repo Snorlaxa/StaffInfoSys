@@ -48,7 +48,7 @@ create table staff(
 	interview_score int(10)  comment '面试综合评分',
 	probation_score int(10) comment '试用期评分',
 	interviewers varchar(100)  comment '面试官成员，用“，”分隔',
-	resume_path varchar(256) not null comment '简历存储路径',
+	resume_path varchar(256) not null default '/' comment '简历存储路径',
 	speciality varchar(256) comment '突出特点，面试官填写',
 	interview_times int(10) not null default 0 comment '应聘次数',
 	email varchar(100) not null comment 'email',

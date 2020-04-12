@@ -8,7 +8,6 @@
         <result column="gender" property="gender" />
         <result column="age" property="age"/>
         <result column="degree" property="degree" />
-        <result column="title" property="title" />
         <result column="school" property="school" />
         <result column="working_years" property="workingYears"/>
         <result column="edu_exp" property="eduExp" />
@@ -27,29 +26,42 @@
         <result column="phone" property="phone" />
         <result column="address" property="address" />
         <result column="city" property="city"/>
+        <result column="jobName" property="jobName"/>
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
+    <resultMap id="SimpleMap" type="snorlaxa.com.infosys.personnel.system.view.vo.StaffVo">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="gender" property="gender" />
+        <result column="age" property="age"/>
+        <result column="degree" property="degree" />
+        <result column="working_years" property="workingYears"/>
+        <result column="jobName" property="jobName"/>
+        <result column="interview_comments" property="interviewComments" />
+    </resultMap>
+
     <sql id="AttributesList">
-        id, name, gender,age,degree, school, working_years,edu_exp,job_exp, project_exp,
-        job_id,employ_status,interview_comments, interview_score,
-        probation_score,interviewers,resume_path, speciality, interview_times,email,phone,address,city,create_time,update_time
+        staff.id, staff.name, gender,age,degree, school, working_years,edu_exp,job_exp, project_exp,
+        job_id,employ_status,interview_comments, interview_score,job.name as jobName,
+        probation_score,interviewers,resume_path, speciality, interview_times,email,phone,address,city,staff.create_time,staff.update_time
     </sql>
 
     <select id="selectStaffs" resultMap="BaseResultMap" parameterType="snorlaxa.com.infosys.personnel.system.dto.StaffSelectDto">
         SELECT
             <include refid="AttributesList"/>
-        FROM staff
+        FROM staff left join job
+            on staff.job_id = job.id
         <where>
             <if test="id != null and id != ''">
-                id = #{id}
+                staff.id = #{id}
             </if>
             <if test="jobId != null and jobId != ''">
                 and job_id = #{jobId}
             </if>
             <if test="name != null and name != ''">
-                and name = #{name}
+                and staff.name = #{name}
             </if>
             <if test="gender != null">
                 and gender = #{gender}
@@ -73,7 +85,66 @@
                 and age = #{age}
             </if>
         </where>
-        ORDER BY update_time
+        ORDER BY update_time DESC
+        <if test="limit > 0 and limit != null">
+            LIMIT #{limit}
+        </if>
+    </select>
+
+    <select id="selectStaffVos" resultMap="SimpleMap" parameterType="snorlaxa.com.infosys.personnel.system.dto.StaffSelectDto">
+        SELECT
+            staff.id, staff.name, gender,age,degree,working_years,interview_comments,city,job.name as jobName
+        FROM staff left join job
+            on staff.job_id = job.id
+        <where>
+            <if test="id != null and id != ''">
+                staff.id = #{id}
+            </if>
+            <if test="jobId != null and jobId != ''">
+                and job_id = #{jobId}
+            </if>
+            <if test="name != null and name != ''">
+                and staff.name = #{name}
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="degree != null">
+                and degree = #{degree}
+            </if>
+            <if test="city != null and city != ''">
+                and city = #{city}
+            </if>
+            <if test="workingYears != null">
+                and working_years = #{workingYears}
+            </if>
+            <if test="employStatus != null">
+                and employ_status = #{employStatus}
+            </if>
+            <if test="interviewTimes != null">
+                and interview_times = #{interviewTimes}
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+            <if test="department != null and department != ''">
+                and job.department_id = #{department}
+            </if>
+            <if test="jobName != null and jobName != ''">
+                and job.name like concat('%', #{jobName,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+        ORDER BY staff.update_time DESC
+        <if test="limit != '' and limit != 0 and limit != null">
+            LIMIT #{limit}
+        </if>
+    </select>
+
+    <select id="selectStaffById" resultType="snorlaxa.com.infosys.personnel.system.po.StaffPo">
+        select <include refid="AttributesList"/>
+        from staff left join job
+            on staff.job_id = job.id
+        where staff.id = #{id}
     </select>
 
     <insert id="upsertStaff" parameterType="snorlaxa.com.infosys.personnel.system.po.StaffPo">

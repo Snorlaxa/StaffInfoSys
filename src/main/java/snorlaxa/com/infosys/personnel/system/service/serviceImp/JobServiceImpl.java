@@ -8,6 +8,7 @@ import snorlaxa.com.infosys.personnel.system.dto.JobSelectDto;
 import snorlaxa.com.infosys.personnel.system.po.JobPo;
 import snorlaxa.com.infosys.personnel.system.service.JobService;
 import snorlaxa.com.infosys.personnel.system.view.params.JobParam;
+import snorlaxa.com.infosys.personnel.system.view.vo.JobVo;
 import snorlaxa.com.infosys.personnel.utils.UUIDUtil;
 
 import java.util.List;
@@ -24,6 +25,11 @@ public class JobServiceImpl implements JobService {
     @Override
     public List<JobPo> getJobs(JobSelectDto selectParam) {
         return jobDao.selectJobs(selectParam);
+    }
+
+    @Override
+    public JobVo getJobVoById(String id) {
+        return jobDao.selectJobVoById(id);
     }
 
     @Override
