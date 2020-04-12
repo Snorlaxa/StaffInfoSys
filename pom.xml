@@ -100,7 +100,20 @@
             <version>2.7.0</version>
         </dependency>
     </dependencies>
-
+    <repositories>
+        <!-- 配置nexus远程仓库 -->
+        <repository>
+            <id>nexus-aliyun</id>
+            <name>Nexus aliyun</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>
