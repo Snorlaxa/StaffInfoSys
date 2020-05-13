@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import snorlaxa.com.infosys.personnel.base.Result;
 import snorlaxa.com.infosys.personnel.contants.BaseEnums;
+import snorlaxa.com.infosys.personnel.system.service.ScoreService;
 import snorlaxa.com.infosys.personnel.system.service.StaffService;
+import snorlaxa.com.infosys.personnel.system.view.params.BatchStaffAbilityParam;
 import snorlaxa.com.infosys.personnel.system.view.params.StaffParam;
 import snorlaxa.com.infosys.personnel.system.view.params.StaffSelectParam;
 import snorlaxa.com.infosys.personnel.utils.Results;
@@ -27,6 +29,8 @@ public class StaffController {
     @Autowired
     private StaffService staffService;
 
+    @Autowired
+    private ScoreService scoreService;
 
     @GetMapping("/")
     @ApiOperation(value = "获取员工信息")
@@ -115,4 +119,13 @@ public class StaffController {
         staffService.delStaff(id);
         return Results.success(BaseEnums.OPERATION_SUCCESS.desc(), BaseEnums.OPERATION_SUCCESS.code());
     }
+
+    @PostMapping("/interview-ability")
+    @ApiOperation(value = "新增面试技能信息")
+    public Result createStaffWithAbility(@RequestBody @Valid BatchStaffAbilityParam batchStaffAbilityParam) {
+        String uuid = staffService.upsertStaff(batchStaffAbilityParam.getStaffParam());
+        scoreService.batchUpsertStaffScore(uuid, batchStaffAbilityParam.getIds(), batchStaffAbilityParam.getScore());
+        return Results.success();
+    }
+
 }

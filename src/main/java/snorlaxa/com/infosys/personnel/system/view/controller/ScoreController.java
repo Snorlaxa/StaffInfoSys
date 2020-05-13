@@ -1,7 +1,6 @@
 package snorlaxa.com.infosys.personnel.system.view.controller;
 
 import java.util.*;
-
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -63,6 +62,7 @@ public class ScoreController {
         scoreService.upsertJobScore(jobScoreParam.getJobId(),jobScoreParam.getAbilityId(),jobScoreParam.getScore());
         return Results.success();
     }
+
     @PostMapping("/staff-score")
     @ApiOperation(value = "新增员工技能评分")
     public Result upsertStaffScore(@RequestBody @Valid StaffScoreParam staffScoreParam){
@@ -96,29 +96,50 @@ public class ScoreController {
         String jobId = staffService.getStaffById(id).getJobId();
         List<ScoreDto> jobScore = scoreService.getJobScore(jobId);
         List<ScoreDto> staffScore = scoreService.getStaffScore(id);
-        Map<String, Integer> jobMap = listToMap(jobScore);
-        Map<String,Integer> staffMap = listToMap(staffScore);
-        Iterator<Map.Entry<String,Integer>> it = jobMap.entrySet().iterator();
-        while(it.hasNext()){
-            Map.Entry<String,Integer> entry = it.next();
-            if(!staffMap.containsKey(entry.getKey())){
-                staffMap.put(entry.getKey(),0);
+        String[] names = new String[jobScore.size()];
+        String[] ids = new String[jobScore.size()];
+        Integer[] jobScores = new Integer[jobScore.size()];
+        Integer[] staffScores = new Integer[jobScore.size()];
+        int i=0;
+        for(ScoreDto scoreDto:jobScore){
+            names[i]=scoreDto.getName();
+            ids[i]=scoreDto.getId();
+            jobScores[i]=scoreDto.getScore();
+            int index = staffScore.indexOf(scoreDto);
+            if(index==-1){
+                staffScores[i]=0;
+            }else{
+                staffScores[i]=staffScore.get(index).getScore();
             }
+            i++;
         }
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name",jobMap.keySet());
-        jsonObject.put("job",jobMap.values());
-        jsonObject.put("staff",staffMap.values());
+        jsonObject.put("name",names);
+        jsonObject.put("job",jobScores);
+        jsonObject.put("staff",staffScores);
+        jsonObject.put("ids",ids);
         return Results.successWithData(jsonObject);
     }
 
-    private Map<String,Integer> listToMap(List<ScoreDto> array ){
-        Map<String,Integer> map = new HashMap<>();
-        Iterator<ScoreDto> it = array.iterator();
-        while(it.hasNext()){
-            ScoreDto scoreDto = it.next();
-            map.put(scoreDto.getName(),scoreDto.getScore());
+
+    @GetMapping("/allJobInfo")
+    @ApiOperation(value = "获取岗位评分信息")
+    public Result getAllJobAbilityInfo(String id){
+        List<ScoreDto> jobScore = scoreService.getJobScore(id);
+        String[] names = new String[jobScore.size()];
+        String[] ids = new String[jobScore.size()];
+        Integer[] jobScores = new Integer[jobScore.size()];
+        int i=0;
+        for(ScoreDto scoreDto:jobScore){
+            names[i]=scoreDto.getName();
+            ids[i]=scoreDto.getId();
+            jobScores[i]=scoreDto.getScore();
+            i++;
         }
-        return map;
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name",names);
+        jsonObject.put("job",jobScores);
+        jsonObject.put("ids",ids);
+        return Results.successWithData(jsonObject);
     }
 }

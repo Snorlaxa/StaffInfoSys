@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="author" content="Themesdesign"/>
+
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/assets/login/css/bootstrap.min.css" type="text/css">
+
+    <!--Material Icon -->
+    <link rel="stylesheet" type="text/css" href="/assets/login/css/materialdesignicons.min.css"/>
+
+    <link rel="stylesheet" type="text/css" href="/assets/login/css/selectize.css"/>
+
+    <link rel="stylesheet" type="text/css" href="/assets/login/css/nice-select.css"/>
+
+    <!-- Custom  Css -->
+    <link rel="stylesheet" type="text/css" href="/assets/login/css/style.css"/>
+
+</head>
+
+<body>
+<!-- Loader -->
+<div id="preloader">
+    <div id="status">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
+</div>
+<!-- Loader -->
+
+<div class="back-to-home rounded d-none d-sm-block">
+    <a href="/index"><h3 style="color: #FFFFFF;" alt="Site Logo">STAFF</h3></a>
+    <h4 style="color: #FFFFFF;">人才信息管理系统</h4>
+</div>
+
+<!-- Hero Start -->
+<section class="vh-100" style="background-color: rgb(9, 108, 214)">
+    <div class="home-center">
+        <div class="home-desc-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="login_page bg-white shadow rounded p-4">
+                            <div class="text-center">
+                                <h4 class="mb-4">Signup</h4>
+                            </div>
+                            <form class="login-form" action="javascript:signup()" method="POST">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group position-relative">
+                                            <label>用户名 <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="user" placeholder="用户名" name="s"
+                                                   required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group position-relative">
+                                            <label>密码 <span class="text-danger">*</span></label>
+                                            <input type="password" class="form-control" id="ps1" placeholder="Password"
+                                                   required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group position-relative">
+                                            <label>确认密码 <span class="text-danger">*</span></label>
+                                            <input type="password" class="form-control" id="ps2"
+                                                   placeholder="Confirm Password" required="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary w-100">注册</button>
+                                    </div>
+                                    <div class="mx-auto">
+                                        <p class="mb-0 mt-3">
+                                            <small class="text-dark mr-2">已有账号 ?</small>
+                                            <a href="/login" class="text-dark font-weight-bold">登录</a></p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div> <!--end col-->
+                </div><!--end row-->
+            </div> <!--end container-->
+        </div>
+    </div>
+</section><!--end section-->
+<!-- Hero End -->
+
+<!-- javascript -->
+<script src="/assets/login/js/jquery.min.js"></script>
+<script src="/assets/login/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/login/js/jquery.easing.min.js"></script>
+<script src="/assets/login/js/plugins.js"></script>
+
+<!-- selectize js -->
+<script src="/assets/login/js/selectize.min.js"></script>
+<script src="/assets/login/js/jquery.nice-select.min.js"></script>
+<script src="/assets/login/js/app.js"></script>
+<script src="/assets/js/signup.js"></script>
+</body>
+</html>

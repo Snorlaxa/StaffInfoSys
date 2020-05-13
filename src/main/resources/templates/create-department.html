@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
+
+    <!-- CSS
+	============================================ -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/assets/css/vendor/bootstrap.min.css">
+
+    <!-- Icon Font CSS -->
+    <link rel="stylesheet" href="/assets/css/vendor/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/vendor/flaticon.css">
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="/assets/css/plugins/slick.css">
+
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+
+            <!-- Header Logo Start -->
+            <div class="col">
+                <div class="header-logo">
+                    <a href="/index">
+                        <h3 style="color: #FFFFFF;" alt="Site Logo">STAFF</h3>
+                    </a>
+                </div>
+            </div><!-- Header Logo End -->
+
+            <!-- Offcanvas Toggle Start -->
+            <div class="col-auto d-lg-none d-flex align-items-center">
+                <button class="offcanvas-toggle">
+                    <span></span>
+                </button>
+            </div>
+            <!-- Offcanvas Toggle End -->
+
+            <!-- Header Links Start -->
+            <div class="header-links col-auto order-lg-3">
+                <a href="#" data-toggle="modal" data-target="#loginSignupModal" data-target-sub="#login" th:text="${username}">Login</a>
+            </div><!-- Header Links End -->
+
+            <!-- Header Menu Start -->
+            <nav id="main-menu" class="main-menu col-lg-auto order-lg-2">
+                <ul>
+                    <li class="has-children"><a href="/index">主页</a></li>
+                    <li class="has-children"><a href="/department-list">部门管理</a>
+                        <ul class="sub-menu">
+                            <li><a href="/department-list">部门列表</a></li>
+                            <li><a href="/create-department">新建部门信息</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-children"><a href="/job-list">岗位管理</a>
+                        <ul class="sub-menu">
+                            <li><a href="/job-list">岗位列表</a></li>
+                            <li><a href="/create-job">新建岗位信息</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/staff-list">人才管理</a>
+                        <ul class="sub-menu">
+                            <li><a href="/staff-list">人才列表</a></li>
+                            <li><a href="/create-staff">新建人才信息</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <!-- Header Menu End -->
+
+        </div>
+
+    </div>
+</header>
+
+
+<!--Offcanvas Section Start-->
+<div id="offcanvas" class="offcanvas-section">
+    <button class="offcanvas-close" data-target="#offcanvas">&times;</button>
+    <div class="offcanvas-wrap">
+        <div class="inner">
+
+            <!-- Offcanvas user Start -->
+            <div class="offcanvas-user">
+                <a href="#" data-toggle="modal" data-target="#loginSignupModal" data-target-sub="#login" th:text="${username}">Login</a>
+            </div>
+            <!-- Offcanvas user End -->
+
+            <!-- Offcanvas Menu Start -->
+            <div class="offcanvas-menu">
+                <nav id="main-menu" class="main-menu col-lg-auto order-lg-2">
+                    <ul>
+                        <li class="has-children"><a href="/index">主页</a></li>
+                        <li class="has-children"><a href="/department-list">部门管理</a>
+                            <ul class="sub-menu">
+                                <li><a href="/department-list">部门列表</a></li>
+                                <li><a href="/create-department">新建部门信息</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-children"><a href="/job-list">岗位管理</a>
+                            <ul class="sub-menu">
+                                <li><a href="/job-list">岗位列表</a></li>
+                                <li><a href="/create-job">新建岗位信息</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/staff-list">人才管理</a>
+                            <ul class="sub-menu">
+                                <li><a href="/staff-list">人才列表</a></li>
+                                <li><a href="/create-staff">新建人才信息</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Offcanvas Menu End -->
+
+        </div>
+    </div>
+</div>
+<!--Offcanvas Section End-->
+<!--OffCanvas Overlay-->
+<div class="offcanvas-overlay"></div>
+
+
+<div class="loginSignupModal modal fade" id="loginSignupModal" tabindex="-1" role="dialog" aria-labelledby="loginSignupModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <ul class="loginSignupNav nav">
+                    <li><a class="nav-link active" data-toggle="tab" href="#login">登录状态</a></li>
+                </ul>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="login">
+                        <form action="/logout">
+                            <div class="row mb-n3">
+                                <div class="col-12 mb-3"><strong>用户：</strong><span  th:text="${username}"></span></div>
+                                <div class="col-6 mb-3" style="margin-left: 25%"><input class="btn btn-primary w-100" type="submit" value="登出"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page Heading Section Start -->
+<div class="page-heading-section section bg-parallax" style="background-color: rgb(9, 108, 214)" data-overlay="50">
+    <div class="container">
+        <div class="page-heading-content text-center">
+            <h3 class="title">新建部门信息</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/index">Home</a></li>
+                <li class="breadcrumb-item"><a href="/department-list">Departments</a></li>
+                <li class="breadcrumb-item active">New Department</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!-- Page Heading Section End -->
+
+<!-- Create Job Start -->
+<div class="section section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="create-job-form col-lg-10 mx-auto">
+                <form action="#" th:action="@{/create-department}" th:object="${departmentParam}" method="post">
+                    <div class="row mb-n3">
+                        <div class="col-md-6 col-12 mb-3">
+                            <label for="jobTitle" >部门名称</label>
+                            <input type="text" id="jobTitle" th:field="*{name}" placeholder="研发中心">
+                        </div>
+                        <div class="col-md-6 col-12 mb-3">
+                            <label for="applicationDeadline">部门人数</label>
+                            <input type="text" id="applicationDeadline" th:field="*{staffNum}" placeholder="200">
+                        </div>
+                        <div class="col-12 mb-3">
+                            <button type="submit" class="btn btn-primary px-5">创建</button>
+                        </div>
+                    </div>
+                    <div class="row"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Create Job End -->
+<div class="footer-top-section section">
+    <div class="container">
+        <div class="footer-widget-wrap row">
+
+            <!-- Footer Widget Start -->
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="footer-widget">
+                    <div class="footer-widget-about">
+                        <h3 style="color: #FFFFFF;" alt="Site Logo">STAFF</h3>
+                        <p>本网站为本科生毕业设计作品，旨在关注企业人才基本信息管理与职业能力评估，为企业提供人才信息管理方案。</p>
+                        <p>个人github与博客.</p>
+                        <ul class="footer-socail">
+                            <li><a href="https://snorlaxa.github.io.com"><i class="fa fa-github"></i></a></li>
+                            <li><a href="http://snorlaxa.cn"><i class="fa fa-bold"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Footer Top Section End -->
+
+<!-- Footer Bottom Section Start -->
+<div class="footer-bottom-section section">
+    <div class="container">
+        <div class="row">
+            <!-- Footer Copyright Start -->
+            <div class="col-12">
+                <p class="footer-copyright text-center">Copyright &copy; 2019.Personal Developer snorlaxa@163.com All
+                    rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer Bottom Section End -->
+
+<!-- JS
+============================================ -->
+
+<!-- Google Map API JS -->
+<script src='https://ditu.google.cn/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>
+
+<!-- Vendors JS -->
+<script src="/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+<script src="/assets/js/vendor/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/vendor/bootstrap.bundle.min.js"></script>
+
+<!-- Plugins JS -->
+<script src="/assets/js/plugins/slick.min.js"></script>
+<script src="/assets/js/plugins/jquery.waypoints.min.js"></script>
+<script src="/assets/js/plugins/jquery.counterup.min.js"></script>
+<script src="/assets/js/plugins/jquery.parallax.js"></script>
+<script src="/assets/js/plugins/jquery.ajaxchimp.min.js"></script>
+<script src="/assets/js/plugins/ion.rangeSlider.min.js"></script>
+<script src="/assets/js/plugins/jquery.scrollUp.min.js"></script>
+
+<!-- Main Activation JS -->
+<script src="/assets/js/main.js"></script>
+</body>
+
+</html>

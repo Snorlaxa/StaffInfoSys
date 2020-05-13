@@ -3,11 +3,11 @@
 <mapper namespace="snorlaxa.com.infosys.personnel.system.dao.ScoreDao">
 
     <select id="selectJobScore" resultType="snorlaxa.com.infosys.personnel.system.dto.ScoreDto">
-        SELECT ab.name, jra.score,ab.classify
+        SELECT ab.id as id,ab.name, jra.score,ab.classify
         FROM job_required_ability as jra
-            left join job
+            inner join job
                 on jra.job_id=job.id
-            left join ability as ab
+            inner join ability as ab
                 on jra.ability_id=ab.id
         <where>
             <if test="jobId != null and jobId != ''">
@@ -17,11 +17,11 @@
     </select>
 
     <select id="selectStaffScore" resultType="snorlaxa.com.infosys.personnel.system.dto.ScoreDto">
-        SELECT ab.name, sa.score,ab.classify
+        SELECT ab.id as id, ab.name, sa.score,ab.classify
         FROM staff_ability as sa
-            left join staff
+            inner join staff
                 on sa.staff_id=staff.id
-            left join ability as ab
+            inner join ability as ab
                 on sa.ability_id=ab.id
         <where>
             <if test="staffId != null and staffId != ''">
@@ -65,4 +65,38 @@
             </if>
         </where>
     </delete>
+
+    <insert id="batchUpsertStaffScore" >
+        REPLACE INTO staff_ability
+        (
+        staff_id,
+        ability_id,
+        score
+        )
+        VALUES
+        <foreach collection="staffScoreDtos" index="index" item="item" separator=",">
+            (
+            #{item.staffId},
+            #{item.abilityId},
+            #{item.score}
+            )
+        </foreach>
+    </insert>
+
+    <insert id="batchUpsertJobScore" >
+        REPLACE INTO job_required_ability
+        (
+        job_id,
+        ability_id,
+        score
+        )
+        VALUES
+        <foreach collection="jobScoreDtos" index="index" item="item" separator=",">
+            (
+            #{item.jobId},
+            #{item.abilityId},
+            #{item.score}
+            )
+        </foreach>
+    </insert>
 </mapper>

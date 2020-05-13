@@ -8,7 +8,17 @@ import lombok.Data;
  */
 @Data
 public class ScoreDto {
+    private String id;
     private String name;
     private String classify;
     private Integer score;
+
+    @Override
+    public boolean equals(Object scoreDto) {
+        if (scoreDto instanceof ScoreDto) {
+            ScoreDto anther = (ScoreDto) scoreDto;
+            return this.id.equals(anther.getId())||this.name.equals(anther.getName());
+        }
+        return false;
+    }
 }

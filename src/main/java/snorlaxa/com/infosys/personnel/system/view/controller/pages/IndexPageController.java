@@ -3,6 +3,8 @@ package snorlaxa.com.infosys.personnel.system.view.controller.pages;
 import com.github.pagehelper.PageInfo;
 import com.sun.xml.internal.ws.resources.HttpserverMessages;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.ModelMap;
@@ -16,6 +18,7 @@ import snorlaxa.com.infosys.personnel.system.service.StaffService;
 import snorlaxa.com.infosys.personnel.system.view.params.PageParam;
 import snorlaxa.com.infosys.personnel.system.view.params.StaffSelectParam;
 import snorlaxa.com.infosys.personnel.system.view.vo.StaffVo;
+import snorlaxa.com.infosys.personnel.utils.AuthUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -36,7 +39,7 @@ public class IndexPageController {
     StaffService staffService;
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String defaultIindex(ModelMap request){
+    public String defaultIndex(ModelMap request){
         List<DepartmentPo> res = departmentService.selectDepartments(null,null);
         request.put("departments",res);
         StaffSelectParam staffSelectParam = new StaffSelectParam();
@@ -44,16 +47,26 @@ public class IndexPageController {
         List<StaffVo> staffVos = staffService.getStaffVo(staffSelectParam);
         request.put("staffs",staffVos);
         request.put("selectParam",staffSelectParam);
+        request.put("username", AuthUtil.getUserName());
+        return "index";
+    }
+
+    @RequestMapping(value = "/",method = RequestMethod.POST)
+    public String defaultIndex2(ModelMap request){
+        List<DepartmentPo> res = departmentService.selectDepartments(null,null);
+        request.put("departments",res);
+        StaffSelectParam staffSelectParam = new StaffSelectParam();
+        staffSelectParam.setLimit(STAFF_NUMBER_LIMIT);
+        List<StaffVo> staffVos = staffService.getStaffVo(staffSelectParam);
+        request.put("staffs",staffVos);
+        request.put("selectParam",staffSelectParam);
+        request.put("username", AuthUtil.getUserName());
         return "index";
     }
 
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(ModelMap request){
-        return defaultIindex(request);
+        return defaultIndex(request);
     }
-
-
-
-
 
 }

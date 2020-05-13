@@ -10,6 +10,7 @@ import snorlaxa.com.infosys.personnel.contants.BaseEnums;
 import snorlaxa.com.infosys.personnel.system.dto.JobSelectDto;
 import snorlaxa.com.infosys.personnel.system.po.JobPo;
 import snorlaxa.com.infosys.personnel.system.service.JobService;
+import snorlaxa.com.infosys.personnel.system.view.params.BatchJobAbilityParam;
 import snorlaxa.com.infosys.personnel.system.view.params.JobParam;
 import snorlaxa.com.infosys.personnel.system.view.vo.JobVo;
 import snorlaxa.com.infosys.personnel.utils.Results;
@@ -38,9 +39,9 @@ public class JobController {
         return Results.successWithData(result, BaseEnums.SUCCESS.desc(),BaseEnums.SUCCESS.code());
     }
 
-    @GetMapping("/getById")
+    @GetMapping("/getById/{id}")
     @ApiOperation(value = "获取岗位信息")
-    public Result getJobVoById(String id){
+    public Result getJobVoById(@PathVariable String id){
         JobVo jobVo = jobService.getJobVoById(id);
         return Results.successWithData(jobVo, BaseEnums.SUCCESS.desc(),BaseEnums.SUCCESS.code());
     }
@@ -72,4 +73,11 @@ public class JobController {
         return Results.successWithData(res,BaseEnums.SUCCESS.desc(),BaseEnums.SUCCESS.code());
     }
 
+
+    @PostMapping("/job-ability")
+    @ApiOperation(value = "新增面试技能信息")
+    public Result createStaffWithAbility(@RequestBody @Valid BatchJobAbilityParam batchJobAbilityParam) {
+        jobService.batchUpsertJobScore(batchJobAbilityParam);
+        return Results.success();
+    }
 }

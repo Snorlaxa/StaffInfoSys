@@ -16,7 +16,7 @@
                 id = #{id}
             </if>
             <if test="name != null and name != ''">
-                and name = #{name}
+                and name like concat('%', #{name,jdbcType=VARCHAR}, '%')
             </if>
         </where>
     </select>

@@ -24,6 +24,23 @@
         on duplicate key update name=#{name}, classify = #{classify}
     </insert>
 
+    <insert id="batchUpsertAbility">
+        INSERT INTO ability
+        (
+        id,
+        name,
+        classify
+        )
+        VALUES
+        <foreach collection="scores" index="index" item="item" separator=",">
+            (
+            #{item.id},
+            #{item.name},
+            #{item.classify}
+            )
+        </foreach>
+    </insert>
+
     <delete id="deleteAbility">
         DELETE FROM ability
         <where>

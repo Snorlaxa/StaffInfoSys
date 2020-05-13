@@ -3,36 +3,37 @@
 <mapper namespace="snorlaxa.com.infosys.personnel.system.dao.JobDao">
 
     <resultMap id="BaseResultMap" type="snorlaxa.com.infosys.personnel.system.po.JobPo">
-        <result column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="requirement" property="requirement" />
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="requirement" property="requirement"/>
         <result column="number" property="number"/>
-        <result column="current_number" property="currentNumber" />
-        <result column="salary" property="salary" />
-        <result column="department_id" property="departmentId" />
+        <result column="current_number" property="currentNumber"/>
+        <result column="salary" property="salary"/>
+        <result column="department_id" property="departmentId"/>
         <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime" />
+        <result column="update_time" property="updateTime"/>
     </resultMap>
 
     <resultMap id="BaseJobVo" type="snorlaxa.com.infosys.personnel.system.view.vo.JobVo">
-        <result column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="requirement" property="requirement" />
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="requirement" property="requirement"/>
         <result column="number" property="number"/>
-        <result column="current_number" property="currentNumber" />
-        <result column="salary" property="salary" />
-        <result column="department_name" property="department" />
+        <result column="current_number" property="currentNumber"/>
+        <result column="salary" property="salary"/>
+        <result column="department_name" property="department"/>
         <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime" />
+        <result column="update_time" property="updateTime"/>
     </resultMap>
 
     <sql id="AttributesList">
         id, name, requirement,number,current_number, salary, department_id,create_time,update_time
     </sql>
 
-    <select id="selectJobs" resultMap="BaseResultMap" parameterType="snorlaxa.com.infosys.personnel.system.dto.JobSelectDto">
+    <select id="selectJobs" resultMap="BaseResultMap"
+            parameterType="snorlaxa.com.infosys.personnel.system.dto.JobSelectDto">
         SELECT
-            <include refid="AttributesList"/>
+        <include refid="AttributesList"/>
         FROM job
         <where>
             <if test="id != null and id != ''">
@@ -45,25 +46,67 @@
                 and department_id = #{departmentId}
             </if>
         </where>
-        ORDER BY update_time
+        ORDER BY update_time DESC
+    </select>
+
+    <select id="selectJobVos" resultMap="BaseJobVo"
+            parameterType="snorlaxa.com.infosys.personnel.system.dto.JobSelectDto">
+        SELECT job.id, job.name, requirement,number,current_number, salary, department.name as
+        department_name,create_time,update_time
+        FROM job LEFT JOIN department
+        ON job.department_id = department.id
+        <where>
+            <if test="id != null and id != ''">
+                job.id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and job.name like concat('%', #{name,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="departmentId != null and departmentId  != ''">
+                and job.department_id = #{departmentId}
+            </if>
+        </where>
+        ORDER BY update_time DESC
     </select>
 
     <select id="selectJobVoById" resultMap="BaseJobVo">
-        SELECT job.id, job.name, requirement,number,current_number, salary, department.name as department_name,create_time,update_time
-        FROM job LEFT JOIN department
-        ON job.department_id = department.id
-        where  job.id = #{id}
+        SELECT job.id,
+               job.name,
+               requirement,
+               number,
+               current_number,
+               salary,
+               department.name as department_name,
+               create_time,
+               update_time
+        FROM job
+                 LEFT JOIN department
+                           ON job.department_id = department.id
+        where job.id = #{id}
+    </select>
+
+    <select id="getJobPoById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="AttributesList"/>
+        FROM job
+        where id = #{id}
     </select>
 
     <insert id="upsertJob" parameterType="snorlaxa.com.infosys.personnel.system.po.JobPo">
-        INSERT INTO job(id,name, requirement, number,
+        INSERT INTO job(id, name, requirement, number,
                         current_number, salary, department_id)
-        VALUES (#{id},#{name}, #{requirement}, #{number},#{currentNumber},#{salary},#{departmentId})
-        on duplicate key update name=#{name}, requirement = #{requirement}, number = #{number}, current_number = #{currentNumber},
-                                salary = #{salary},department_id = #{departmentId}
+        VALUES (#{id}, #{name}, #{requirement}, #{number}, #{currentNumber}, #{salary}, #{departmentId})
+        on duplicate key update name=#{name},
+                                requirement = #{requirement},
+                                number = #{number},
+                                current_number = #{currentNumber},
+                                salary = #{salary},
+                                department_id = #{departmentId}
     </insert>
 
     <delete id="deleteJob">
-        DELETE FROM job where id =#{id}
+        DELETE
+        FROM job
+        where id = #{id}
     </delete>
 </mapper>

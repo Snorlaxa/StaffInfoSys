@@ -5,62 +5,114 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title></title>
-    <meta name="robots" content="noindex, follow" />
+    <meta name="robots" content="noindex, follow"/>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
 
     <!-- CSS
 	============================================ -->
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/vendor/bootstrap.min.css">
 
     <!-- Icon Font CSS -->
-    <link rel="stylesheet" href="assets/css/vendor/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/vendor/flaticon.css">
+    <link rel="stylesheet" href="/assets/css/vendor/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/vendor/flaticon.css">
 
     <!-- Plugins CSS -->
-    <link rel="stylesheet" href="assets/css/plugins/slick.css">
+    <link rel="stylesheet" href="/assets/css/plugins/slick.css">
 
     <!-- Main Style CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 
+</head>
 </head>
 
 <body>
 
-    <header class="header">
-        <div class="container">
-            <div class="row justify-content-between align-items-center">
+<header class="header">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
 
-                <!-- Header Logo Start -->
-                <div class="col">
-                    <div class="header-logo">
-                        <a href="index.html"><img src="assets/images/logo/logo-light.png" alt="Site Logo"></a>
-                    </div>
-                </div><!-- Header Logo End -->
-
-                <!-- Offcanvas Toggle Start -->
-                <div class="col-auto d-lg-none d-flex align-items-center">
-                    <button class="offcanvas-toggle">
-                        <span></span>
-                    </button>
+            <!-- Header Logo Start -->
+            <div class="col">
+                <div class="header-logo">
+                    <a href="/index">
+                        <h3 style="color: #FFFFFF;" alt="Site Logo">STAFF</h3>
+                    </a>
                 </div>
-                <!-- Offcanvas Toggle End -->
+            </div><!-- Header Logo End -->
 
-                <!-- Header Links Start -->
-                <div class="header-links col-auto order-lg-3">
-                    <a href="#" data-toggle="modal" data-target="#loginSignupModal" data-target-sub="#login">Login</a>
-                    <span>or</span>
-                    <a href="#" data-toggle="modal" data-target="#loginSignupModal" data-target-sub="#signup">Sign up</a>
-                </div><!-- Header Links End -->
+            <!-- Offcanvas Toggle Start -->
+            <div class="col-auto d-lg-none d-flex align-items-center">
+                <button class="offcanvas-toggle">
+                    <span></span>
+                </button>
+            </div>
+            <!-- Offcanvas Toggle End -->
 
-                <!-- Header Menu Start -->
-                <nav id="main-menu" class="main-menu col-lg-auto order-lg-2">
+            <!-- Header Links Start -->
+            <div class="header-links col-auto order-lg-3">
+                <a href="#" data-toggle="modal" data-target="#loginSignupModal" data-target-sub="#login" th:text="${username}">Login</a>
+            </div><!-- Header Links End -->
+
+            <!-- Header Menu Start -->
+            <nav id="main-menu" class="main-menu col-lg-auto order-lg-2">
+                <ul>
+                    <li class="has-children"><a href="/index">主页</a></li>
+                    <li class="has-children"><a href="/department-list">部门管理</a>
+                        <ul class="sub-menu">
+                            <li><a href="/department-list">部门列表</a></li>
+                            <li><a href="/create-department">新建部门信息</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-children"><a href="/job-list">岗位管理</a>
+                        <ul class="sub-menu">
+                            <li><a href="/job-list">岗位列表</a></li>
+                            <li><a href="/create-job">新建岗位信息</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/staff-list">人才管理</a>
+                        <ul class="sub-menu">
+                            <li><a href="/staff-list">人才列表</a></li>
+                            <li><a href="/create-staff">新建人才信息</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <!-- Header Menu End -->
+
+        </div>
+
+    </div>
+</header>
+
+
+<!--Offcanvas Section Start-->
+<div id="offcanvas" class="offcanvas-section">
+    <button class="offcanvas-close" data-target="#offcanvas">&times;</button>
+    <div class="offcanvas-wrap">
+        <div class="inner">
+
+            <!-- Offcanvas user Start -->
+            <div class="offcanvas-user">
+                <a href="#" data-toggle="modal" data-target="#loginSignupModal" data-target-sub="#login" th:text="${username}">Login</a>
+            </div>
+            <!-- Offcanvas user End -->
+
+            <!-- Offcanvas Menu Start -->
+            <div class="offcanvas-menu">
+                <nav id="main" class="main-menu col-lg-auto order-lg-2">
                     <ul>
                         <li class="has-children"><a href="/index">主页</a></li>
+                        <li class="has-children"><a href="/department-list">部门管理</a>
+                            <ul class="sub-menu">
+                                <li><a href="/department-list">部门列表</a></li>
+                                <li><a href="/create-department">新建部门信息</a></li>
+                            </ul>
+                        </li>
                         <li class="has-children"><a href="/job-list">岗位管理</a>
                             <ul class="sub-menu">
                                 <li><a href="/job-list">岗位列表</a></li>
@@ -73,484 +125,231 @@
                                 <li><a href="/create-staff">新建人才信息</a></li>
                             </ul>
                         </li>
-                        <li><a href="/contact">数据统计</a></li>
                     </ul>
                 </nav>
-                <!-- Header Menu End -->
-
             </div>
+            <!-- Offcanvas Menu End -->
 
         </div>
-    </header>
+    </div>
+</div>
+<!--Offcanvas Section End-->
+<!--OffCanvas Overlay-->
+<div class="offcanvas-overlay"></div>
 
 
-    <!--Offcanvas Section Start-->
-    <div id="offcanvas" class="offcanvas-section">
-        <button class="offcanvas-close" data-target="#offcanvas">&times;</button>
-        <div class="offcanvas-wrap">
-            <div class="inner">
-
-                <!-- Offcanvas user Start -->
-                <div class="offcanvas-user">
-                    <a href="#" data-toggle="modal" data-target="#loginSignupModal" data-target-sub="#login">Login</a>
-                    <span>or</span>
-                    <a href="#" data-toggle="modal" data-target="#loginSignupModal" data-target-sub="#signup">Sign up</a>
+<div class="loginSignupModal modal fade" id="loginSignupModal" tabindex="-1" role="dialog"
+     aria-labelledby="loginSignupModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <ul class="loginSignupNav nav">
+                    <li><a class="nav-link active" data-toggle="tab" href="#login">登录状态</a></li>
+                </ul>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="login">
+                        <form action="/logout">
+                            <div class="row mb-n3">
+                                <div class="col-12 mb-3"><strong>用户：</strong><span  th:text="${username}"></span></div>
+                                <div class="col-6 mb-3" style="margin-left: 25%"><input class="btn btn-primary w-100" type="submit" value="登出"></div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <!-- Offcanvas user End -->
-
-                <!-- Offcanvas Menu Start -->
-                <div class="offcanvas-menu">
-                    <nav>
-                        <ul>
-                            <li class="has-children"><a href="/index">主页</a></li>
-                            <li class="has-children"><a href="/job-list">岗位管理</a>
-                                <ul class="sub-menu">
-                                    <li><a href="/job-list">岗位列表</a></li>
-                                    <li><a href="/create-job">新建岗位信息</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="/staff-list">人才管理</a>
-                                <ul class="sub-menu">
-                                    <li><a href="/staff-list">人才列表</a></li>
-                                    <li><a href="/create-staff">新建人才信息</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="/contact">数据统计</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <!-- Offcanvas Menu End -->
-
             </div>
         </div>
     </div>
-    <!--Offcanvas Section End-->
-    <!--OffCanvas Overlay-->
-    <div class="offcanvas-overlay"></div>
+</div>
 
+<!-- Page Heading Section Start -->
+<div class="page-heading-section section bg-parallax" style="background-color: rgb(9, 108, 214)" data-overlay="50">
+    <div class="container">
+        <div class="page-heading-content text-center">
+            <h3 class="title">岗位管理</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/index">Home</a></li>
+                <li class="breadcrumb-item active"><a href="/staff-list">Jobs</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!-- Page Heading Section End -->
 
-    <div class="loginSignupModal modal fade" id="loginSignupModal" tabindex="-1" role="dialog" aria-labelledby="loginSignupModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
+<!-- Recent Jobs Start -->
+<div class="section section-padding">
+    <div class="container">
+        <div class="row mb-n5">
 
-                    <ul class="loginSignupNav nav">
-                        <li><a class="nav-link active" data-toggle="tab" href="#login">登录</a></li>
-                        <li><a class="nav-link" data-toggle="tab" href="#signup">注册</a></li>
-                    </ul>
+            <div class="col-lg-8 col-12 mb-5 pr-lg-5">
 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-
+                <!-- Job List Toolbar Start -->
+                <div class="job-list-toolbar">
+                    <sapn th:text="'每页数量 : '+${pageInfo.pageSize}">a</sapn>
                 </div>
-                <div class="modal-body">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="login">
-                            <form>
-                                <div class="row mb-n3">
-                                    <div class="col-12 mb-3"><input type="email" placeholder="Email"></div>
-                                    <div class="col-12 mb-3"><input type="password" placeholder="Password"></div>
+                <!-- Job List Toolbar End -->
+
+                <!-- Job List Wrap Start -->
+                <div class="job-list-wrap" th:each="job : ${pageInfo.datas}">
+                    <!-- Job List Start -->
+                    <a href="job-single" th:href="'/job-single/'+${job.id}" class="job-list">
+                        <div class="company-logo col-auto" style="margin-right: 1%">
+                            <i class="fa fa-3x fa-address-card-o" style="color: #239e00;" alt="Company Logo"></i>
+                        </div>
+                        <div class="salary-type col-auto order-sm-3">
+                            <span class="salary-range" th:text="${job.salary}+'元/月'">部门</span>
+                            <span class="badge badge-warning" th:text="${job.department}">工作3年</span>
+                        </div>
+                        <div class="content col">
+                            <h6 class="title" th:text="${job.name}">Java 开发工程师</h6>
+                            <ul class="meta">
+                                <li><strong class="text-primary" th:text="'需求： '+${job.number}+' 人'">需求</strong></li>
+                                <li><i class="fa fa-calendar-check-o"></i><span
+                                        th:text="${#dates.format(job.createTime,'yyyy-MM-dd')}">上海</span>
+                                </li>
+                                <li><i class="fa fa-address-book-o"></i>
+                                    <span th:text="${#strings.abbreviate(job.requirement,30)}">面试官评价：个人能力优秀，对java后端开发有非常丰富的经验...</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+                <!-- Job List Wrap Start -->
+
+                <!-- Pagination Start -->
+                <ul class="pagination pagination-center mt-5">
+                    <li class="page-item">
+                        <a class="page-link"
+                           th:href="@{/job-list(page=${pageInfo.prePage},
+                           pageSize=${pageInfo.pageSize},
+                           departmentId=${selectParam.departmentId},
+                            name=${selectParam.name})}">
+                            <i class="fa fa-angle-left"></i></a>
+                    </li>
+                    <li class="page-item" th:classappend="${pageInfo.pageNum} == ${num}? 'active' : '' "
+                        th:each="num : ${pageInfo.navpages}">
+                        <!--                        <a class="page-link"-->
+                        <!--                           th:href="'/staff-list?page='+${num}+'&pageSize='+${pageInfo.pageSize}+'&name='+${selectParam.name}+''"-->
+                        <!--                           th:text="${num}">1</a>-->
+                        <a class="page-link"
+                           th:href="@{/job-list(page=${num},
+                            pageSize=${pageInfo.pageSize},
+                            departmentId=${selectParam.departmentId},
+                            name=${selectParam.name})}"
+                           th:text="${num}">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link"
+                           th:href="@{/job-list(page=${pageInfo.nextPage},pageSize=${pageInfo.pageSize},
+                           departmentId=${selectParam.departmentId},
+                           name=${selectParam.name})}">
+                            <i class="fa fa-angle-right"></i></a>
+                    </li>
+                </ul>
+                <!-- Pagination End -->
+            </div>
+
+            <!-- Job Sidebar Wrap Start -->
+            <div class="col-lg-4 col-12 mb-5">
+                <div class="sidebar-wrap">
+                    <!-- Sidebar (Search) Start -->
+                    <div class="sidebar-widget">
+                        <div class="inner">
+                            <h6 class="title">搜索岗位信息</h6>
+                            <form action="#" th:action="@{/job-list/search-list}" th:object="${selectParam}"
+                                  method="post">
+                                <div class="col-12 mb-3">
+                                    <input class="btn btn-primary w-100" type="submit" value="Search">
+                                </div>
+                                <br>
+                                <div class="row">
                                     <div class="col-12 mb-3">
-                                        <div class="row justify-content-between mb-n2">
-                                            <div class="col-auto mb-2">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" name="remember-me" id="remember-me" value="checkedValue" class="custom-control-input">
-                                                    <label class="custom-control-label" for="remember-me">Remember me</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-auto mb-2"><a href="#">Forgot Password?</a></div>
-                                        </div>
+                                        <label>岗位名称</label>
+                                        <input type="text" th:field="*{name}" placeholder="岗位名称">
                                     </div>
-                                    <div class="col-12 mb-3"><input class="btn btn-primary w-100" type="submit" value="Login"></div>
-                                </div>
-                                <div class="row mt-4">
-                                    <div class="col text-center">
-                                        <p class="text-muted">Or Login With</p>
-                                        <div class="login-reg-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="tab-pane fade" id="signup">
-                            <form>
-                                <div class="row mb-n3">
-                                    <div class="col-12 mb-3"><input type="text" placeholder="Your Name"></div>
-                                    <div class="col-12 mb-3"><input type="email" placeholder="Your Email Address"></div>
-                                    <div class="col-12 mb-3"><input type="password" placeholder="Choose a Password"></div>
-                                    <div class="col-12 mb-3"><input class="btn btn-primary w-100" type="submit" value="Sign Up"></div>
-                                </div>
-                                <div class="row mt-4">
-                                    <div class="col text-center">
-                                        <p class="text-muted">Or Register With</p>
-                                        <div class="login-reg-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        </div>
+                                    <div class="col-12 mb-3">
+                                        <label>部门</label>
+                                        <select id="department" th:field="*{departmentId}">
+                                            <option value="">选择部门</option>
+                                            <option th:each="op : ${departments}" th:value="${op.id}"><p th:text="${op.name}">部门</p>
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
+                    <div class="sidebar-widget">
+                        <div class="inner">
+                            <h6 class="title">新建岗位信息</h6>
+                            <a class="btn btn-primary w-100" th:href="@{/create-job}">新建岗位信息</a>
+                        </div>
+                    </div>
+                    <!-- Sidebar (Qualification) End -->
                 </div>
+            </div>
+            <!-- Job Sidebar Wrap End -->
+
+        </div>
+    </div>
+</div>
+<!-- Recent Jobs End -->
+<!-- Footer Top Section Start -->
+<div class="footer-top-section section">
+    <div class="container">
+        <div class="footer-widget-wrap row">
+
+            <!-- Footer Widget Start -->
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="footer-widget">
+                    <div class="footer-widget-about">
+                        <h3 style="color: #FFFFFF;" alt="Site Logo">STAFF</h3>
+                        <p>本网站为本科生毕业设计作品，旨在关注企业人才基本信息管理与职业能力评估，为企业提供人才信息管理方案。</p>
+                        <p>个人github与博客.</p>
+                        <ul class="footer-socail">
+                            <li><a href="https://snorlaxa.github.io.com"><i class="fa fa-github"></i></a></li>
+                            <li><a href="http://snorlaxa.cn"><i class="fa fa-bold"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Footer Top Section End -->
+
+<!-- Footer Bottom Section Start -->
+<div class="footer-bottom-section section">
+    <div class="container">
+        <div class="row">
+            <!-- Footer Copyright Start -->
+            <div class="col-12">
+                <p class="footer-copyright text-center">Copyright &copy; 2019.Personal Developer snorlaxa@163.com All
+                    rights reserved.</p>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Page Heading Section Start -->
-    <div class="page-heading-section section bg-parallax" style="background-color: rgb(9, 108, 214)" data-overlay="50">
-        <div class="container">
-            <div class="page-heading-content text-center">
-                <h3 class="title">岗位列表</h3>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/index">Home</a></li>
-                    <li class="breadcrumb-item active"><a href="/staff-list">Jobs</a></li>
-                </ol>
-            </div>
-        </div>
-    </div>
-    <!-- Page Heading Section End -->
 
-    <!-- Company List Start -->
-    <div class="section section-padding">
-        <div class="container">
-            <div class="row mb-n5">
+<!-- Vendors JS -->
+<script src="/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+<script src="/assets/js/vendor/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/vendor/bootstrap.bundle.min.js"></script>
 
-                <div class="col-lg-8 col-12 mb-5 pr-lg-5">
+<!-- Plugins JS -->
+<script src="/assets/js/plugins/slick.min.js"></script>
+<script src="/assets/js/plugins/jquery.waypoints.min.js"></script>
+<script src="/assets/js/plugins/jquery.counterup.min.js"></script>
+<script src="/assets/js/plugins/jquery.parallax.js"></script>
+<script src="/assets/js/plugins/jquery.ajaxchimp.min.js"></script>
+<script src="/assets/js/plugins/ion.rangeSlider.min.js"></script>
+<script src="/assets/js/plugins/jquery.scrollUp.min.js"></script>
 
-                    <!-- Company List Wrap Start -->
-                    <div class="company-list-wrap row">
-
-                        <!-- Company List Start -->
-                        <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
-                            <a href="/job-single" class="company-list">
-                                <span class="company-logo"><img src="assets/images/companies/company-1.png" alt="company-1"></span>
-                                <h6 class="title">Envato</h6>
-                                <span class="open-job">2 open positions</span>
-                                <span class="location"><i class="fa fa-map-o"></i>Melbourne, Australia</span>
-                            </a>
-                        </div>
-                        <!-- Company List Start -->
-
-                        <!-- Company List Start -->
-                        <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
-                            <a href="/company-single" class="company-list">
-                                <span class="company-logo"><img src="assets/images/companies/company-2.png" alt="company-1"></span>
-                                <h6 class="title">Astha</h6>
-                                <span class="open-job">1 open positions</span>
-                                <span class="location"><i class="fa fa-map-o"></i>Dhaka, Bangladesh</span>
-                            </a>
-                        </div>
-                        <!-- Company List Start -->
-
-                        <!-- Company List Start -->
-                        <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
-                            <a href="company-single.html" class="company-list">
-                                <span class="company-logo"><img src="assets/images/companies/company-3.png" alt="company-1"></span>
-                                <h6 class="title">Github</h6>
-                                <span class="open-job">4 open positions</span>
-                                <span class="location"><i class="fa fa-map-o"></i>San Francisco, USA</span>
-                            </a>
-                        </div>
-                        <!-- Company List Start -->
-
-                        <!-- Company List Start -->
-                        <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
-                            <a href="company-single.html" class="company-list">
-                                <span class="company-logo"><img src="assets/images/companies/company-4.png" alt="company-1"></span>
-                                <h6 class="title">Medicore</h6>
-                                <span class="open-job">1 open positions</span>
-                                <span class="location"><i class="fa fa-map-o"></i>Los Angeles, USA</span>
-                            </a>
-                        </div>
-                        <!-- Company List Start -->
-
-                        <!-- Company List Start -->
-                        <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
-                            <a href="company-single.html" class="company-list">
-                                <span class="company-logo"><img src="assets/images/companies/company-5.png" alt="company-1"></span>
-                                <h6 class="title">Greensoul</h6>
-                                <span class="open-job">1 open positions</span>
-                                <span class="location"><i class="fa fa-map-o"></i>Tokyo, Japan</span>
-                            </a>
-                        </div>
-                        <!-- Company List Start -->
-
-                        <!-- Company List Start -->
-                        <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
-                            <a href="company-single.html" class="company-list">
-                                <span class="company-logo"><img src="assets/images/companies/company-6.png" alt="company-1"></span>
-                                <h6 class="title">Generous</h6>
-                                <span class="open-job">2 open positions</span>
-                                <span class="location"><i class="fa fa-map-o"></i>Osaka, Japan</span>
-                            </a>
-                        </div>
-                        <!-- Company List Start -->
-
-                        <!-- Company List Start -->
-                        <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
-                            <a href="company-single.html" class="company-list">
-                                <span class="company-logo"><img src="assets/images/companies/company-7.png" alt="company-1"></span>
-                                <h6 class="title">Buzco</h6>
-                                <span class="open-job">3 open positions</span>
-                                <span class="location"><i class="fa fa-map-o"></i>Dubai, UAE</span>
-                            </a>
-                        </div>
-                        <!-- Company List Start -->
-
-                        <!-- Company List Start -->
-                        <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
-                            <a href="company-single.html" class="company-list">
-                                <span class="company-logo"><img src="assets/images/companies/company-8.png" alt="company-1"></span>
-                                <h6 class="title">Salina</h6>
-                                <span class="open-job">1 open positions</span>
-                                <span class="location"><i class="fa fa-map-o"></i>Cambridge, UK</span>
-                            </a>
-                        </div>
-                        <!-- Company List Start -->
-
-                        <!-- Company List Start -->
-                        <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
-                            <a href="company-single.html" class="company-list">
-                                <span class="company-logo"><img src="assets/images/companies/company-9.png" alt="company-1"></span>
-                                <h6 class="title">Hope</h6>
-                                <span class="open-job">1 open positions</span>
-                                <span class="location"><i class="fa fa-map-o"></i>Ottawa, Canada</span>
-                            </a>
-                        </div>
-                        <!-- Company List Start -->
-
-                        <!-- Company List Start -->
-                        <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
-                            <a href="company-single.html" class="company-list">
-                                <span class="company-logo"><img src="assets/images/companies/company-10.png" alt="company-span"></span>
-                                <h6 class="title">Bebsha</h6>
-                                <span class="open-job">2 open positions</span>
-                                <span class="location"><i class="fa fa-map-o"></i>Coimbra, Portugal</span>
-                            </a>
-                        </div>
-                        <!-- Company List Start -->
-
-                        <!-- Company List Start -->
-                        <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
-                            <a href="company-single.html" class="company-list">
-                                <span class="company-logo"><img src="assets/images/companies/company-11.png" alt="company-span"></span>
-                                <h6 class="title">Fnions</h6>
-                                <span class="open-job">1 open positions</span>
-                                <span class="location"><i class="fa fa-map-o"></i>Madrid, Spain</span>
-                            </a>
-                        </div>
-                        <!-- Company List Start -->
-
-                        <!-- Company List Start -->
-                        <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
-                            <a href="company-single.html" class="company-list">
-                                <span class="company-logo"><img src="assets/images/companies/company-12.png" alt="company-span"></span>
-                                <h6 class="title">Donna</h6>
-                                <span class="open-job">3 open positions</span>
-                                <span class="location"><i class="fa fa-map-o"></i>Liverpool, UK</span>
-                            </a>
-                        </div>
-                        <!-- Company List Start -->
-
-                    </div>
-                    <!-- Company List Wrap Start -->
-
-                    <!-- Pagination Start -->
-                    <ul class="pagination pagination-center mt-5">
-                        <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
-                    </ul>
-                    <!-- Pagination End -->
-
-                </div>
-
-                <!-- Company Sidebar Wrap Start -->
-                <div class="col-lg-4 col-12 mb-5">
-                    <div class="sidebar-wrap">
-                        <!-- Sidebar (Search) Start -->
-                        <div class="sidebar-widget">
-                            <div class="inner">
-                                <h6 class="title">Search Company</h6>
-                                <form action="#">
-                                    <div class="row">
-                                        <div class="col-12 mb-3"><input type="text" placeholder="Keyword"></div>
-                                        <div class="col-12 mb-3">
-                                            <label>Category</label>
-                                            <select>
-                                                <option value="1">Any category</option>
-                                                <option value="2">Web Designer</option>
-                                                <option value="3">Web Developer</option>
-                                                <option value="4">Graphic Designer</option>
-                                                <option value="5">App Developer</option>
-                                                <option value="6">UI &amp; UX Expert</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12 mb-3">
-                                            <label>Location</label>
-                                            <input type="text" placeholder="Location">
-                                        </div>
-                                        <div class="col-12 mb-3">
-                                            <label>Company Sizes</label>
-                                            <select>
-                                                <option>All Company Size</option>
-                                                <option>&lt; 10 employees</option>
-                                                <option>10 ~ 50 employees</option>
-                                                <option>50 ~ 200 employees</option>
-                                                <option>200 ~ 500 employees</option>
-                                                <option>500 ~ 2000 employees</option>
-                                                <option>&gt; 2000 employees</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12 mb-3">
-                                            <input class="btn btn-primary w-100" type="submit" value="Search">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- Sidebar (Search) End -->
-
-                        <!-- Sidebar (Search) Start -->
-                        <div class="sidebar-widget">
-                            <div class="inner">
-                                <a class="banner" href="https://hasthemes.com/plugins/ht-mega-pro/" target="_blank"><img src="assets/images/banner/banner-1.jpg" alt="Banner"></a>
-                            </div>
-                        </div>
-                        <!-- Sidebar (Search) End -->
-                    </div>
-                </div>
-                <!-- Company Sidebar Wrap End -->
-
-            </div>
-        </div>
-    </div>
-    <!-- Company List End -->
-    <!-- Footer Top Section Start -->
-    <div class="footer-top-section section">
-        <div class="container">
-            <div class="footer-widget-wrap row">
-
-                <!-- Footer Widget Start -->
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="footer-widget">
-                        <div class="footer-widget-about">
-                            <h3 style="color: #FFFFFF;" alt="Site Logo">STAFF</h3>
-                            <p>Lorem ipsum dolor sit amet consecte tur adipisicing elit. Maiores officiis quod quo id
-                                inventore quis.</p>
-
-                            <ul class="footer-socail">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Footer Widget End -->
-
-                <!-- Footer Widget Start -->
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="footer-widget">
-                        <h6 class="title">Quick links</h6>
-                        <div class="footer-widget-link">
-                            <ul>
-                                <li><a href="#">Post New Job</a></li>
-                                <li><a href="#">Jobs List</a></li>
-                                <li><a href="#">Candidate List</a></li>
-                                <li><a href="#">Employer List</a></li>
-                                <li><a href="#">Browse Categories</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Footer Widget End -->
-
-                <!-- Footer Widget Start -->
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="footer-widget">
-                        <h6 class="title">Tranding Jobs</h6>
-                        <div class="footer-widget-link">
-                            <ul>
-                                <li><a href="#">Designer</a></li>
-                                <li><a href="#">UI & UX Expert</a></li>
-                                <li><a href="#">Develpoer</a></li>
-                                <li><a href="#">iOS developer</a></li>
-                                <li><a href="#">Front-End developer</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Footer Widget End -->
-
-                <!-- Footer Widget Start -->
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="footer-widget">
-                        <h6 class="title">Newsletter</h6>
-                        <div class="footer-widget-newsletter">
-                            <p>Subscribe to Lawson to get all latest Job, Resume, Company Listing & Blog post to stay
-                                update.</p>
-                            <form id="mc-form" class="mc-form">
-                                <input id="mc-email" autocomplete="off" type="email"
-                                       placeholder="Enter your e-mail address">
-                                <button id="mc-submit" class="btn"><i class="fa fa-envelope-o"></i></button>
-                            </form>
-                            <!-- mailchimp-alerts Start -->
-                            <div class="mailchimp-alerts text-centre">
-                                <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                                <div class="mailchimp-success text-success"></div><!-- mailchimp-success end -->
-                                <div class="mailchimp-error text-danger"></div><!-- mailchimp-error end -->
-                            </div><!-- mailchimp-alerts end -->
-                        </div>
-                    </div>
-                </div>
-                <!-- Footer Widget End -->
-
-            </div>
-        </div>
-    </div>
-    <!-- Footer Top Section End -->
-
-    <!-- Footer Bottom Section Start -->
-    <div class="footer-bottom-section section">
-        <div class="container">
-            <div class="row">
-
-                <!-- Footer Copyright Start -->
-                <div class="col-12">
-                    <p class="footer-copyright text-center">Copyright &copy; 2019.Personal Developer snorlaxa@163.com All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Vendors JS -->
-    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
-    <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
-    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
-
-    <!-- Plugins JS -->
-    <script src="assets/js/plugins/slick.min.js"></script>
-    <script src="assets/js/plugins/jquery.waypoints.min.js"></script>
-    <script src="assets/js/plugins/jquery.counterup.min.js"></script>
-    <script src="assets/js/plugins/jquery.parallax.js"></script>
-    <script src="assets/js/plugins/jquery.ajaxchimp.min.js"></script>
-    <script src="assets/js/plugins/ion.rangeSlider.min.js"></script>
-    <script src="assets/js/plugins/jquery.scrollUp.min.js"></script>
-
-    <!-- Main Activation JS -->
-    <script src="assets/js/main.js"></script>
+<!-- Main Activation JS -->
+<script src="/assets/js/main.js"></script>
 
 </body>
 

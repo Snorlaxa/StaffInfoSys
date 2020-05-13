@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import snorlaxa.com.infosys.personnel.system.po.StaffPo;
 import snorlaxa.com.infosys.personnel.system.service.StaffService;
+import snorlaxa.com.infosys.personnel.utils.AuthUtil;
 
 /**
  * @Author: snorlaxa
@@ -24,6 +25,7 @@ public class InterviewPageController {
     public String interview(@PathVariable String id, ModelMap request){
         StaffPo staffPo = staffService.getStaffById(id);
         request.put("staff",staffPo);
+        request.put("username", AuthUtil.getUserName());
         return "interview";
     }
 }

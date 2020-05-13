@@ -3,8 +3,9 @@ var id = $('#staffId').html();
 var names = new Array();
 var job = new Array();
 var staff = new Array();
+var ids = new Array();
 
-console.log(id);
+// console.log(id);
 $.ajax({
     url: '/api/score/allInfo',
     data: {"id": id},
@@ -16,12 +17,7 @@ $.ajax({
             names = res['name'];
             staff = res['staff'];
             job = res['job'];
-            // for(var i=0;i<res['name'].length;i++){
-            //     name.push(name01[i]);
-            //     job.push(job01[i]);
-            //     staff.push(staff01[i]);
-            // }
-            console.log(names);
+            ids = res['ids'];
             var score = document.getElementById('score');
             for (var i = 0; i < names.length; i++) {
                 score.innerHTML += " <li>\n" +
@@ -31,18 +27,63 @@ $.ajax({
                     "                                </li>"
             }
             initSlider();
-            // var jobs = document.getElementById("jobs");
-            // $("#jobs").empty();
-            // if(department.length == 0){
-            //     jobs.options.add(new Option("选择岗位",""));
-            // }
-            // for(var i=0;i<res.length;i++){
-            //     jobs.options.add(new Option(res[i]["name"],res[i]["id"]));
-            // }
             initChart(names, job, staff);
         }
     }
 });
+
+function submitData() {
+    var interviewComments = $("#interviewComments").val();
+    var speciality = $("#speciality").val();
+    var interviewers =$("#interviewers").val();
+    var interviewScore = $("#interviewScore").val();
+    var probation = $("#probation").val();
+    var jobId = '';
+    $.ajax({
+        url: '/api/staff/'+id,
+        dataType: 'json',
+        type: 'GET',
+        success: function (data) {
+            if (data["success"]) {
+                var res = data["data"];
+                res['interviewComments']=interviewComments;
+                res['interviewScore']=interviewScore;
+                res['speciality']=speciality;
+                res['interviewers']=interviewers;
+                jobId = res['jobId'];
+                console.log(jobId);
+                res['probationScore']=probation.length==0?0:probation;
+                var batch={
+                    "staffParam":res,
+                    "ids":ids,
+                    "score":staff
+                }
+                $.ajax({
+                    url: '/api/staff/interview-ability',
+                    data:JSON.stringify(batch),
+                    type: 'POST',
+                    charset: 'UTF-8',
+                    contentType:'application/json',
+                    success: function () {
+                        window.location="/staff-single/"+id;
+                    }
+                });
+            }
+        }
+    });
+}
+
+function submitScore(jobId) {
+    $.ajax({
+        url: '/api/staff/',
+        data:JSON.stringify(res),
+        type: 'POST',
+        contentType:'application/json',
+        success: function () {
+            window.location="/staff-list";
+        }
+    });
+}
 
 
 function initSlider() {

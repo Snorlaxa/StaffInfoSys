@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="snorlaxa.com.infosys.personnel.system.dao.UserDao">
+    <select id="getUserByName" parameterType="String"
+            resultType="snorlaxa.com.infosys.personnel.security.SysUser">
+        select id, username, password, role
+        from user
+        where username = #{username}
+    </select>
+
+    <insert id="insertUser" parameterType="snorlaxa.com.infosys.personnel.system.po.UserPo">
+        replace into user(id, username, password, role)
+        values (#{id}, #{username}, #{password}, #{role})
+    </insert>
+</mapper>

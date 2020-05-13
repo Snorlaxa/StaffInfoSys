@@ -10,9 +10,18 @@ import java.util.List;
  */
 public interface ScoreService {
     List<ScoreDto> getJobScore(String jobId);
+
     List<ScoreDto> getStaffScore(String staffId);
-    void upsertJobScore(String jobId,String abilityId,Integer score);
-    void upsertStaffScore(String staffId,String abilityId,Integer score);
-    void delJobScore(String jobId,String abilityId);
-    void delStaffScore(String staffId,String abilityId);
+
+    void upsertJobScore(String jobId, String abilityId, Integer score);
+
+    void upsertStaffScore(String staffId, String abilityId, Integer score);
+
+    void batchUpsertStaffScore(String staffId, List<String> abilityIds, List<Integer> score);
+
+    void batchUpsertJobScore(String jobId, List<String> abilityIds, List<String> abilityNames, List<Integer> score);
+
+    void delJobScore(String jobId, String abilityId);
+
+    void delStaffScore(String staffId, String abilityId);
 }
