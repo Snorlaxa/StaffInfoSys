@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
 
     <!-- CSS
 	============================================ -->
@@ -54,7 +54,8 @@
 
             <!-- Header Links Start -->
             <div class="header-links col-auto order-lg-3">
-                <a href="#" data-toggle="modal" data-target="#loginSignupModal" data-target-sub="#login" th:text="${username}"></a>
+                <a href="#" data-toggle="modal" data-target="#loginSignupModal" data-target-sub="#login"
+                   th:text="${username}"></a>
             </div><!-- Header Links End -->
 
             <!-- Header Menu Start -->
@@ -97,7 +98,8 @@
 
             <!-- Offcanvas user Start -->
             <div class="offcanvas-user">
-                <a href="#" data-toggle="modal" data-target="#loginSignupModal" data-target-sub="#login" th:text="${username}">Login</a>
+                <a href="#" data-toggle="modal" data-target="#loginSignupModal" data-target-sub="#login"
+                   th:text="${username}">Login</a>
             </div>
             <!-- Offcanvas user End -->
 
@@ -152,8 +154,9 @@
                     <div class="tab-pane fade show active" id="login">
                         <form action="/logout">
                             <div class="row mb-n3">
-                                <div class="col-12 mb-3"><strong>用户：</strong><span  th:text="${username}"></span></div>
-                                <div class="col-6 mb-3" style="margin-left: 25%"><input class="btn btn-primary w-100" type="submit" value="登出"></div>
+                                <div class="col-12 mb-3"><strong>用户：</strong><span th:text="${username}"></span></div>
+                                <div class="col-6 mb-3" style="margin-left: 25%"><input class="btn btn-primary w-100"
+                                                                                        type="submit" value="登出"></div>
                             </div>
                         </form>
                     </div>
@@ -253,7 +256,7 @@
                         </li>
                         <li><i class="fa fa-address-book-o"></i>
                             <span th:text="${#strings.abbreviate(staff.interviewComments,30)}"
-                                  >面试官评价：个人能力优秀，对java后端开发有非常丰富的经验...</span>
+                            >面试官评价：个人能力优秀，对java后端开发有非常丰富的经验...</span>
                         </li>
                     </ul>
                 </div>
