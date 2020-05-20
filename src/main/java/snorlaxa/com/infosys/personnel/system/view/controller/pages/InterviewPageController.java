@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import snorlaxa.com.infosys.personnel.system.po.StaffPo;
 import snorlaxa.com.infosys.personnel.system.service.StaffService;
+import snorlaxa.com.infosys.personnel.system.service.UserService;
 import snorlaxa.com.infosys.personnel.utils.AuthUtil;
 
 /**
@@ -21,11 +22,16 @@ public class InterviewPageController {
     @Autowired
     StaffService staffService;
 
-    @RequestMapping(value = "/interview/{id}",method = RequestMethod.GET)
-    public String interview(@PathVariable String id, ModelMap request){
+    @Autowired
+    UserService userService;
+
+    @RequestMapping(value = "/interview/{id}", method = RequestMethod.GET)
+    public String interview(@PathVariable String id, ModelMap request) {
         StaffPo staffPo = staffService.getStaffById(id);
-        request.put("staff",staffPo);
-        request.put("username", AuthUtil.getUserName());
+        request.put("staff", staffPo);
+        String name = AuthUtil.getUserName();
+        request.put("username", name);
+        request.put("updateTime", userService.getUserByName(name).getUpdateTime());
         return "interview";
     }
 }

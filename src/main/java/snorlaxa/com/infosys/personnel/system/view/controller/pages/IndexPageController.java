@@ -9,11 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import snorlaxa.com.infosys.personnel.base.PageInfoList;
+import snorlaxa.com.infosys.personnel.security.SysUser;
 import snorlaxa.com.infosys.personnel.system.dto.StaffSelectDto;
 import snorlaxa.com.infosys.personnel.system.po.DepartmentPo;
 import snorlaxa.com.infosys.personnel.system.po.StaffPo;
 import snorlaxa.com.infosys.personnel.system.service.DepartmentService;
 import snorlaxa.com.infosys.personnel.system.service.StaffService;
+import snorlaxa.com.infosys.personnel.system.service.UserService;
 import snorlaxa.com.infosys.personnel.system.view.params.PageParam;
 import snorlaxa.com.infosys.personnel.system.view.params.StaffSelectParam;
 import snorlaxa.com.infosys.personnel.system.view.vo.StaffVo;
@@ -37,6 +39,9 @@ public class IndexPageController {
     @Autowired
     StaffService staffService;
 
+    @Autowired
+    UserService userService;
+
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String defaultIndex(ModelMap request){
         List<DepartmentPo> res = departmentService.selectDepartments(null,null);
@@ -46,7 +51,9 @@ public class IndexPageController {
         List<StaffVo> staffVos = staffService.getStaffVo(staffSelectParam);
         request.put("staffs",staffVos);
         request.put("selectParam",staffSelectParam);
-        request.put("username", AuthUtil.getUserName());
+        String name = AuthUtil.getUserName();
+        request.put("username", name);
+        request.put("updateTime",userService.getUserByName(name).getUpdateTime());
         return "index";
     }
 
@@ -59,7 +66,9 @@ public class IndexPageController {
         List<StaffVo> staffVos = staffService.getStaffVo(staffSelectParam);
         request.put("staffs",staffVos);
         request.put("selectParam",staffSelectParam);
-        request.put("username", AuthUtil.getUserName());
+        String name = AuthUtil.getUserName();
+        request.put("username", name);
+        request.put("updateTime",userService.getUserByName(name).getUpdateTime());
         return "index";
     }
 

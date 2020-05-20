@@ -5,14 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import snorlaxa.com.infosys.personnel.base.PageInfoList;
+import snorlaxa.com.infosys.personnel.security.SysUser;
 import snorlaxa.com.infosys.personnel.system.dto.JobSelectDto;
 import snorlaxa.com.infosys.personnel.system.po.DepartmentPo;
 import snorlaxa.com.infosys.personnel.system.po.JobPo;
 import snorlaxa.com.infosys.personnel.system.po.StaffPo;
-import snorlaxa.com.infosys.personnel.system.service.DepartmentService;
-import snorlaxa.com.infosys.personnel.system.service.JobService;
-import snorlaxa.com.infosys.personnel.system.service.ScoreService;
-import snorlaxa.com.infosys.personnel.system.service.StaffService;
+import snorlaxa.com.infosys.personnel.system.service.*;
 import snorlaxa.com.infosys.personnel.system.view.params.JobParam;
 import snorlaxa.com.infosys.personnel.system.view.params.PageParam;
 import snorlaxa.com.infosys.personnel.system.view.params.StaffParam;
@@ -45,13 +43,18 @@ public class StaffPageController {
 
     @Autowired
     ScoreService scoreService;
+
+    @Autowired
+    UserService userService;
     @RequestMapping(value = "/staff-single/{id}",method = RequestMethod.GET)
     public String staffSingle(@PathVariable String id, HttpServletRequest request){
         StaffPo staffPo = staffService.getStaffById(id);
         JobVo jobVo = jobService.getJobVoById(staffPo.getJobId());
         request.setAttribute("staff",staffPo);
         request.setAttribute("job",jobVo);
-        request.setAttribute("username", AuthUtil.getUserName());
+        String name = AuthUtil.getUserName();
+        request.setAttribute("username", name);
+        request.setAttribute("updateTime",userService.getUserByName(name).getUpdateTime());
         return "staff-single";
     }
 
@@ -74,7 +77,9 @@ public class StaffPageController {
         PageInfoList<StaffVo> pageInfo = staffService.getStaffVo(selectParam,pageParam);
         request.put("pageInfo",pageInfo);
         request.put("selectParam",selectParam);
-        request.put("username", AuthUtil.getUserName());
+        String name = AuthUtil.getUserName();
+        request.put("username", name);
+        request.put("updateTime",userService.getUserByName(name).getUpdateTime());
         return "staff-list";
     }
 
@@ -86,7 +91,9 @@ public class StaffPageController {
         List<JobPo> jobs =jobService.getJobs(new JobSelectDto());
         request.put("departments",res);
         request.put("jobs",jobs);
-        request.put("username", AuthUtil.getUserName());
+        String name = AuthUtil.getUserName();
+        request.put("username", name);
+        request.put("updateTime",userService.getUserByName(name).getUpdateTime());
         return "create-staff";
     }
 
@@ -110,7 +117,9 @@ public class StaffPageController {
         PageInfoList<StaffVo> pageInfo = staffService.getStaffVo(selectParam,pageParam);
         request.put("pageInfo",pageInfo);
         request.put("selectParam",selectParam);
-        request.put("username", AuthUtil.getUserName());
+        String name = AuthUtil.getUserName();
+        request.put("username", name);
+        request.put("updateTime",userService.getUserByName(name).getUpdateTime());
         return "redirect:staff-list";
     }
 
@@ -135,7 +144,9 @@ public class StaffPageController {
         PageInfoList<StaffVo> pageInfo = staffService.getStaffVo(selectParam,pageParam);
         request.put("pageInfo",pageInfo);
         request.put("selectParam",selectParam);
-        request.put("username", AuthUtil.getUserName());
+        String name = AuthUtil.getUserName();
+        request.put("username", name);
+        request.put("updateTime",userService.getUserByName(name).getUpdateTime());
         return "staff-list";
     }
 

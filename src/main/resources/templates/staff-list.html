@@ -145,15 +145,40 @@
             <div class="modal-header">
                 <ul class="loginSignupNav nav">
                     <li><a class="nav-link active" data-toggle="tab" href="#login">登录状态</a></li>
+                    <li><a class="nav-link" data-toggle="tab" href="#signup">修改密码</a></li>
                 </ul>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="login">
                         <form action="/logout">
                             <div class="row mb-n3">
-                                <div class="col-12 mb-3"><strong>用户：</strong><span  th:text="${username}"></span></div>
-                                <div class="col-6 mb-3" style="margin-left: 25%"><input class="btn btn-primary w-100" type="submit" value="登出"></div>
+                                <div class="col-12 mb-3"><strong>用户：</strong><span id="username"
+                                                                                   th:text="${username}"></span></div>
+                                <div class="col-12 mb-3"><strong>创建时间：</strong><span
+                                        th:text="${#dates.format(updateTime,'yyyy-MM-dd HH:mm:ss')}"></span>
+                                </div>
+                                <div class="col-6 mb-3" style="margin-left: 25%"><input class="btn btn-primary w-100"
+                                                                                        type="submit" value="登出"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="signup">
+                        <form action="javascript:editPassword();">
+                            <div class="row mb-n3">
+                                <div class="col-12 mb-3"><label for="current-password">当前密码</label><input
+                                        id="current-password" type="password"></div>
+                                <div class="col-12 mb-3"><label for="new-password">新密码</label><input id="new-password"
+                                                                                                     type="password">
+                                </div>
+                                <div class="col-12 mb-3"><label for="new-password-repeat">重复新密码</label><input
+                                        id="new-password-repeat" type="password"></div>
+                                <div class="col-12 mb-3"><input class="btn btn-primary w-100" type="submit" value="修改">
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -443,7 +468,7 @@
 
 <!-- Main Activation JS -->
 <script src="/assets/js/main.js"></script>
-
+<script src="/assets/js/login.js"></script>
 </body>
 
 </html>

@@ -11,6 +11,7 @@ import snorlaxa.com.infosys.personnel.system.po.JobPo;
 import snorlaxa.com.infosys.personnel.system.service.DepartmentService;
 import snorlaxa.com.infosys.personnel.system.service.JobService;
 import snorlaxa.com.infosys.personnel.system.service.StaffService;
+import snorlaxa.com.infosys.personnel.system.service.UserService;
 import snorlaxa.com.infosys.personnel.system.view.params.*;
 import snorlaxa.com.infosys.personnel.system.view.vo.StaffVo;
 import snorlaxa.com.infosys.personnel.utils.AuthUtil;
@@ -30,6 +31,9 @@ public class DepartmentPageController {
     @Autowired
     DepartmentService departmentService;
 
+    @Autowired
+    UserService userService;
+
     @PostMapping("/department-list/search-list")
     public String searchDepartment(@ModelAttribute("selectParam") DepartmentParam departmentParam, ModelMap request){
         return departmentList(departmentParam,new PageParam(),request);
@@ -47,7 +51,9 @@ public class DepartmentPageController {
         PageInfoList<DepartmentPo> pageInfo = departmentService.getDepartmentPo(departmentParam,pageParam);
         request.put("pageInfo",pageInfo);
         request.put("selectParam",departmentParam);
-        request.put("username", AuthUtil.getUserName());
+        String name = AuthUtil.getUserName();
+        request.put("username", name);
+        request.put("updateTime",userService.getUserByName(name).getUpdateTime());
         return "department-list";
     }
 
@@ -55,7 +61,9 @@ public class DepartmentPageController {
     public String createDepartment(ModelMap request){
         DepartmentParam departmentParam = new DepartmentParam();
         request.put("departmentParam",departmentParam);
-        request.put("username", AuthUtil.getUserName());
+        String name = AuthUtil.getUserName();
+        request.put("username", name);
+        request.put("updateTime",userService.getUserByName(name).getUpdateTime());
         return "create-department";
     }
 
@@ -68,7 +76,9 @@ public class DepartmentPageController {
         PageInfoList<DepartmentPo> pageInfo = departmentService.getDepartmentPo(departmentParam,pageParam);
         request.put("pageInfo",pageInfo);
         request.put("selectParam",departmentParam);
-        request.put("username", AuthUtil.getUserName());
+        String name = AuthUtil.getUserName();
+        request.put("username", name);
+        request.put("updateTime",userService.getUserByName(name).getUpdateTime());
         return "redirect:department-list";
     }
 

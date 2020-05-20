@@ -1,6 +1,7 @@
 package snorlaxa.com.infosys.personnel.system.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
+import snorlaxa.com.infosys.personnel.security.SysUser;
 import snorlaxa.com.infosys.personnel.system.po.UserPo;
 
 /**
@@ -9,4 +10,5 @@ import snorlaxa.com.infosys.personnel.system.po.UserPo;
  */
 public interface UserService extends UserDetailsService {
     String upsertUser(UserPo userPo);
+    SysUser getUserByName(String name);
 }

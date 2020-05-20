@@ -41,6 +41,8 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+
+
     @Override
     public String upsertUser(UserPo userPo) {
         if(null == userPo.getId()){
@@ -48,5 +50,10 @@ public class UserServiceImpl implements UserService {
         }
         userDao.insertUser(userPo);
         return userPo.getId();
+    }
+
+    @Override
+    public SysUser getUserByName(String name) {
+        return userDao.getUserByName(name);
     }
 }

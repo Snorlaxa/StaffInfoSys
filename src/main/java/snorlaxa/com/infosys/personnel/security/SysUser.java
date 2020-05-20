@@ -1,6 +1,9 @@
 package snorlaxa.com.infosys.personnel.security;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * @Author: snorlaxa
@@ -12,4 +15,6 @@ public class SysUser {
     private String username;
     private String password;
     private String role;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    private Date updateTime;
 }

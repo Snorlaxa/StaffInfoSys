@@ -9,6 +9,7 @@ import snorlaxa.com.infosys.personnel.system.dto.JobSelectDto;
 import snorlaxa.com.infosys.personnel.system.po.DepartmentPo;
 import snorlaxa.com.infosys.personnel.system.service.DepartmentService;
 import snorlaxa.com.infosys.personnel.system.service.JobService;
+import snorlaxa.com.infosys.personnel.system.service.UserService;
 import snorlaxa.com.infosys.personnel.system.view.params.JobParam;
 import snorlaxa.com.infosys.personnel.system.view.params.PageParam;
 import snorlaxa.com.infosys.personnel.system.view.vo.JobVo;
@@ -31,6 +32,8 @@ public class JobPageController {
     DepartmentService departmentService;
     @Autowired
     JobService jobService;
+    @Autowired
+    UserService userService;
     @RequestMapping(value = "/job-list",method = RequestMethod.GET)
     public String jobList(JobSelectDto selectParam, PageParam pageParam, ModelMap request){
         if(pageParam.getPageSize() == null){
@@ -45,7 +48,9 @@ public class JobPageController {
         PageInfoList<JobVo> pageInfo = jobService.getJobVos(selectParam,pageParam);
         request.put("pageInfo",pageInfo);
         request.put("selectParam",selectParam);
-        request.put("username", AuthUtil.getUserName());
+        String name = AuthUtil.getUserName();
+        request.put("username", name);
+        request.put("updateTime",userService.getUserByName(name).getUpdateTime());
         return "job-list";
     }
 
@@ -54,7 +59,9 @@ public class JobPageController {
     public String jobSingle(@PathVariable String id, HttpServletRequest request){
         JobVo jobVo = jobService.getJobVoById(id);
         request.setAttribute("job",jobVo);
-        request.setAttribute("username", AuthUtil.getUserName());
+        String name = AuthUtil.getUserName();
+        request.setAttribute("username", name);
+        request.setAttribute("updateTime",userService.getUserByName(name).getUpdateTime());
         return "job-single";
     }
 
@@ -67,7 +74,9 @@ public class JobPageController {
 
     @PostMapping("/job-list/search-list")
     public String searchJob(@ModelAttribute("selectParam") JobSelectDto selectParam, ModelMap request){
-        request.put("username", AuthUtil.getUserName());
+        String name = AuthUtil.getUserName();
+        request.put("username", name);
+        request.put("updateTime",userService.getUserByName(name).getUpdateTime());
         return jobList(selectParam,new PageParam(),request);
     }
 
@@ -75,14 +84,18 @@ public class JobPageController {
     public String createList(ModelMap request){
         JobParam jobParam = new JobParam();
         request.put("jobParam",jobParam);
-        request.put("username", AuthUtil.getUserName());
+        String name = AuthUtil.getUserName();
+        request.put("username", name);
+        request.put("updateTime",userService.getUserByName(name).getUpdateTime());
         List<DepartmentPo> res = departmentService.selectDepartments(null,null);
         request.put("departments",res);
         return "create-job";
     }
     @PostMapping("/create-job")
     public String createJob(@ModelAttribute("jobParam") JobParam jobParam, ModelMap request){
-        request.put("username", AuthUtil.getUserName());
+        String name = AuthUtil.getUserName();
+        request.put("username", name);
+        request.put("updateTime",userService.getUserByName(name).getUpdateTime());
         jobParam.setCurrentNumber(0);
         jobService.upsertJob(jobParam);
         PageParam pageParam = new PageParam();

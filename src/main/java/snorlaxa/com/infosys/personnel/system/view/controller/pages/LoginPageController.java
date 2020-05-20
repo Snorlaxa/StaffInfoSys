@@ -3,6 +3,7 @@ package snorlaxa.com.infosys.personnel.system.view.controller.pages;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -34,4 +35,5 @@ public class LoginPageController {
         request.put("msg","用户名或密码错误!");
         return "login";
     }
+
 }

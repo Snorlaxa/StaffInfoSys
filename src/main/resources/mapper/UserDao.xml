@@ -3,7 +3,7 @@
 <mapper namespace="snorlaxa.com.infosys.personnel.system.dao.UserDao">
     <select id="getUserByName" parameterType="String"
             resultType="snorlaxa.com.infosys.personnel.security.SysUser">
-        select id, username, password, role
+        select id, username, password, role,update_time as updateTime
         from user
         where username = #{username}
     </select>

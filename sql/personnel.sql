@@ -13,6 +13,7 @@ create table user
     username     varchar(20) not null comment '用户名',
     password varchar(100) not null comment '密码',
     role varchar(20) not null comment '角色',
+    update_time timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
     primary key (id)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8 COMMENT ='用户表';
