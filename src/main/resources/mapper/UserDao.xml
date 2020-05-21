@@ -9,7 +9,14 @@
     </select>
 
     <insert id="insertUser" parameterType="snorlaxa.com.infosys.personnel.system.po.UserPo">
-        replace into user(id, username, password, role)
+        insert into user(id, username, password, role)
         values (#{id}, #{username}, #{password}, #{role})
+    </insert>
+    <insert id="upsertUser" parameterType="snorlaxa.com.infosys.personnel.system.po.UserPo">
+        insert into user(id, username, password, role)
+        values (#{id}, #{username}, #{password}, #{role})
+        on duplicate key update username=#{username},
+                                password = #{password},
+                                role = #{role}
     </insert>
 </mapper>

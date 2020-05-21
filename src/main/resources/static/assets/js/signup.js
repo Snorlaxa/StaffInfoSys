@@ -7,6 +7,7 @@ function signup() {
         "password":ps1
     }
     if (ps1 != ps2) {
+        $("#msg").html("两次输入密码不匹配");
         return;
     }
     $.ajax({
@@ -18,8 +19,9 @@ function signup() {
         contentType:'application/json',
         success: function (data) {
             if (data["success"]) {
-                console.log(data);
-                window.location="/login";
+                window.location="/toLogin";
+            }else {
+                $("#msg").html(data["msg"]);
             }
         }
     });

@@ -42,8 +42,8 @@ public class SecurityController {
         userPo.setPassword(signUpParam.getPassword());
         userPo.setUsername(signUpParam.getName());
         userPo.setRole("USER");
-        String id  = userService.upsertUser(userPo);
-        return Results.success(id);
+        String id  = userService.insertUser(userPo);
+        return null != id?Results.success(id):Results.fail("此用户名已被占用！");
     }
 
     @RequestMapping(value = "/edit-password",method = RequestMethod.POST)

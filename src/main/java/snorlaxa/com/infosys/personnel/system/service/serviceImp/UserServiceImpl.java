@@ -2,6 +2,7 @@ package snorlaxa.com.infosys.personnel.system.service.serviceImp;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -48,7 +49,24 @@ public class UserServiceImpl implements UserService {
         if(null == userPo.getId()){
             userPo.setId(UUIDUtil.getUUID());
         }
-        userDao.insertUser(userPo);
+        try{
+            userDao.upsertUser(userPo);
+        }catch (DataAccessException e){
+            return null;
+        }
+        return userPo.getId();
+    }
+
+    @Override
+    public String insertUser(UserPo userPo) {
+        if(null == userPo.getId()){
+            userPo.setId(UUIDUtil.getUUID());
+        }
+        try{
+            userDao.insertUser(userPo);
+        }catch (DataAccessException e){
+            return null;
+        }
         return userPo.getId();
     }
 

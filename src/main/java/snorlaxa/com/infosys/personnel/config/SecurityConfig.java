@@ -36,14 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers( "/signup", "/assets/**","/api/security/signup","/login/error").permitAll()
+                .antMatchers( "/signup", "/assets/**","/api/security/signup","/toLogin/error").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/toLogin")
                 .loginProcessingUrl("/user/login")
                 .defaultSuccessUrl("/")
-                .failureUrl("/login/error")
+                .failureUrl("/toLogin/error")
                 .permitAll()
                 .and()
                 .logout()

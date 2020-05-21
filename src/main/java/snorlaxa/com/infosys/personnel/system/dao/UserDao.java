@@ -10,4 +10,5 @@ import snorlaxa.com.infosys.personnel.security.SysUser;
 public interface UserDao {
     SysUser getUserByName(String name);
     void insertUser(UserPo userPo);
+    void upsertUser(UserPo userPo);
 }

@@ -10,5 +10,6 @@ import snorlaxa.com.infosys.personnel.system.po.UserPo;
  */
 public interface UserService extends UserDetailsService {
     String upsertUser(UserPo userPo);
+    String insertUser(UserPo userPo);
     SysUser getUserByName(String name);
 }
