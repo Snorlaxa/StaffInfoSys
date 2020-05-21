@@ -20,6 +20,6 @@ public class LogOutHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         log.info("退出成功");
-        httpServletResponse.sendRedirect("/login");
+        httpServletResponse.sendRedirect("/toLogin");
     }
 }
